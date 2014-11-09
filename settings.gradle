@@ -1,2 +1,2 @@
-include 'RecognitionCore'
 include 'RecognitionEngine'
+include 'RecognitionCore'

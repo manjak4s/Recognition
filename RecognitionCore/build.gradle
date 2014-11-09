@@ -1,20 +1,67 @@
+import com.android.build.OutputFile;
+
+def findResDirs = {
+    return file(it).listFiles().findAll { it.name.startsWith('res') }.collect()
+}
+
+ext.asVersion = '1.10.0'
+ext.aaVersion = '3.0.1'
+ext.groundyVersion = '1.5'
+
 apply plugin: 'com.android.application'
+apply plugin: 'aptlibs'
 
-android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
-
-    defaultConfig {
-        applicationId "com.morkva.recognition"
-        minSdkVersion 15
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
-    }
+configurations {
+    apt
 }
 
 dependencies {
     compile project(':RecognitionEngine')
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.0'
+
+    compile "com.github.hamsterksu:android-annotatedsql-api:${asVersion}"
+    compile "com.telly:groundy:${groundyVersion}"
+    compile "org.androidannotations:androidannotations-api:${aaVersion}"
+
+    compile 'com.android.support:support-v4:19.1.0'
+}
+
+aptlibs {
+    annotatedSql {
+        version "${asVersion}"
+    }
+
+    groundy {
+        version "${groundyVersion}"
+    }
+
+    androidAnnotations {
+        version "${aaVersion}"
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileVersion
+    buildToolsVersion = rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "support.morkva.recognition"
+        minSdkVersion rootProject.ext.minVersion
+        targetSdkVersion rootProject.ext.compileVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = findResDirs('src/main')
+            java.srcDirs = ['src/main/java', 'build/source/apt/${variant.dirName}']
+        }
+    }
 }
