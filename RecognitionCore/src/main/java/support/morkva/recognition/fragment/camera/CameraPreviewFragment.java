@@ -1,6 +1,8 @@
 package support.morkva.recognition.fragment.camera;
 
 import android.hardware.Camera;
+import android.os.Handler;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -25,28 +27,29 @@ public class CameraPreviewFragment extends BasicFragment {
 
     @AfterViews
     protected void init() {
-        surfaceCameraComponent.setCamera(CameraUtil.getCameraInstance());
+//        surfaceCameraComponent.setCamera(CameraUtil.getCameraInstance());
     }
 
     @Override
     public void onResume() {
+        Logger.d("onResume");
         super.onResume();
         int numCams = Camera.getNumberOfCameras();
-        if(numCams > 0){
-            try{
-                Logger.d("camera under init");
+        if (numCams > 0) {
+            try {
                 camera = Camera.open(0);
                 camera.startPreview();
                 surfaceCameraComponent.setCamera(camera);
-            } catch (RuntimeException ex){
-                Logger.d("Sorry, no cameras");
+            } catch (RuntimeException ex) {
+                Logger.e("failed", ex);
             }
         }
     }
 
     @Override
     public void onPause() {
-        if(camera != null) {
+        Logger.d("onPause");
+        if (camera != null) {
             camera.stopPreview();
             surfaceCameraComponent.setCamera(null);
             camera.release();
@@ -54,10 +57,4 @@ public class CameraPreviewFragment extends BasicFragment {
         }
         super.onPause();
     }
-
-    private void resetCam() {
-        camera.startPreview();
-        surfaceCameraComponent.setCamera(camera);
-    }
-
 }

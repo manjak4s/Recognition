@@ -10,6 +10,7 @@ import android.hardware.Camera;
 public class CameraUtil {
 
     public static boolean checkCameraHardware(Context context) {
+        Logger.d("Number of cameras : " + Camera.getNumberOfCameras());
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
             // this device has a camera
             return true;

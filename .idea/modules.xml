@@ -6,11 +6,14 @@
       <module fileurl="file://$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" filepath="$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" filepath="$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" filepath="$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" filepath="$PROJECT_DIR$/RecognitionCore/RecognitionCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" filepath="$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" filepath="$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" filepath="$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" filepath="$PROJECT_DIR$/RecognitionEngine/RecognitionEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionNew.iml" filepath="$PROJECT_DIR$/RecognitionNew.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecognitionNew.iml" filepath="$PROJECT_DIR$/RecognitionNew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RecognitionNew1.iml" filepath="$PROJECT_DIR$/RecognitionNew1.iml" />
     </modules>
   </component>
 </project>

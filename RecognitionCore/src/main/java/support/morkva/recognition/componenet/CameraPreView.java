@@ -4,138 +4,81 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.WindowManager;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EView;
 
 import java.io.IOException;
 import java.util.List;
 
-import support.morkva.recognition.R;
 import support.morkva.recognition.util.Logger;
 
 /**
  * Created by irikhmayer on 10.11.2014.
  */
-@EViewGroup(R.layout.camera_preview)
-public class CameraPreView extends FrameLayout implements SurfaceHolder.Callback {
+@EView
+public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback {
 
-    @ViewById
-    protected SurfaceView surfaceCamera;
+    private final String TAG = "Preview";
 
-    protected SurfaceHolder holder;
-    protected Camera camera;
-    protected List<Camera.Size> localSizes;
+    protected SurfaceHolder holderInstance;
     protected Camera.Size previewSize;
+    protected List<Camera.Size> mSupportedPreviewSizes;
+    protected Camera cameraInstance;
+    protected boolean isPreviewRunning;
 
-    public CameraPreView(Context context) {
+    public CameraPreView(Context context, SurfaceView sv) {
         super(context);
     }
 
     public CameraPreView(Context context, AttributeSet attrs) {
-        // To be able use views in xml, you should implement 2 other constructors from View
         super(context, attrs);
     }
 
     public CameraPreView(Context context, AttributeSet attrs, int defStyle) {
-        // To be able use views in xml, you should implement 2 other constructors from View
         super(context, attrs, defStyle);
     }
 
     @AfterViews
-    protected void init() {
-        holder = surfaceCamera.getHolder();
-        holder.addCallback(this);
-        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-
+    protected void initUI() {
+        Logger.d("initUI");
+        holderInstance = getHolder();
+        holderInstance.addCallback(this);
+        holderInstance.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-    @UiThread
     public void setCamera(Camera camera) {
-        if (this.camera == camera) { return; }
-
-        stopPreviewAndFreeCamera();
-
-        this.camera = camera;
-
-        if (camera != null) {
-            List<Camera.Size> localSizes = camera.getParameters().getSupportedPreviewSizes();
-            this.localSizes = localSizes;
+        Logger.d("setCamera");
+        cameraInstance = camera;
+        if (cameraInstance != null) {
+            Logger.d("setCamera ok");
+            mSupportedPreviewSizes = cameraInstance.getParameters().getSupportedPreviewSizes();
             requestLayout();
 
-            try {
-                camera.setPreviewDisplay(holder);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Important: Call startPreview() to start updating the preview
-            // surface. Preview must be started before you can take a picture.
-            camera.startPreview();
-            // FIXME odd behavior
             // get Camera parameters
-            Camera.Parameters params = camera.getParameters();
+            Camera.Parameters params = cameraInstance.getParameters();
+
             List<String> focusModes = params.getSupportedFocusModes();
             if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
                 // set the focus mode
                 params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
                 // set Camera parameters
-                camera.setParameters(params);
+                cameraInstance.setParameters(params);
             }
-        }
-    }
-
-    private boolean safeCameraOpen(int id) {
-        boolean opened = false;
-
-        try {
-            releaseCameraAndPreview();
-            camera = Camera.open(id);
-            opened = (camera != null);
-        } catch (Exception e) {
-            Log.e(getContext().getString(R.string.app_name), "failed to open Camera");
-            e.printStackTrace();
-        }
-
-        return opened;
-    }
-
-    private void releaseCameraAndPreview() {
-        setCamera(null);
-        if (camera != null) {
-            camera.release();
-            camera = null;
-        }
-    }
-
-    /**
-     * When this function returns, mCamera will be null.
-     */
-    private void stopPreviewAndFreeCamera() {
-
-        if (camera != null) {
-            // Call stopPreview() to stop updating the preview surface.
-            camera.stopPreview();
-
-            // Important: Call release() to release the camera for use by other
-            // applications. Applications should release the camera immediately
-            // during onPause() and re-open() it during onResume()).
-            camera.release();
-
-            camera = null;
+        } else {
+            Logger.d("setCamera null");
         }
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Logger.d("onMeasure");
         // We purposely disregard child measurements because act as a
         // wrapper to a SurfaceView that centers the camera preview instead
         // of stretching it.
@@ -143,72 +86,39 @@ public class CameraPreView extends FrameLayout implements SurfaceHolder.Callback
         final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
         setMeasuredDimension(width, height);
 
-        if (localSizes != null) {
-            previewSize = getOptimalPreviewSize(localSizes, width, height);
+        if (mSupportedPreviewSizes != null) {
+            previewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
         }
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (changed && getChildCount() > 0) {
-            final View child = getChildAt(0);
-
-            final int width = r - l;
-            final int height = b - t;
-
-            int previewWidth = width;
-            int previewHeight = height;
-            if (previewSize != null) {
-                previewWidth = previewSize.width;
-                previewHeight = previewSize.height;
-            }
-
-            // Center the child SurfaceView within the parent.
-            if (width * previewHeight > height * previewWidth) {
-                final int scaledChildWidth = previewWidth * height / previewHeight;
-                child.layout((width - scaledChildWidth) / 2, 0,
-                        (width + scaledChildWidth) / 2, height);
-            } else {
-                final int scaledChildHeight = previewHeight * width / previewWidth;
-                child.layout(0, (height - scaledChildHeight) / 2,
-                        width, (height + scaledChildHeight) / 2);
-            }
-        }
-    }
-
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, acquire the camera and tell it where
         // to draw.
         try {
-            if (camera != null) {
-                camera.setPreviewDisplay(holder);
+            if (cameraInstance != null) {
+                cameraInstance.setPreviewDisplay(holder);
+                Logger.d("surfaceCreated ok");
+            } else {
+                Logger.d("surfaceCreated null");
             }
         } catch (IOException exception) {
-            Logger.e("IOException caused by setPreviewDisplay()", exception);
+            Log.e(TAG, "IOException caused by setPreviewDisplay()", exception);
         }
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        // Now that the size is known, set up the camera parameters and begin
-        // the preview.
-        Camera.Parameters parameters = camera.getParameters();
-        parameters.setPreviewSize(previewSize.width, previewSize.height);
-        requestLayout();
-        camera.setParameters(parameters);
-
-        // Important: Call startPreview() to start updating the preview surface.
-        // Preview must be started before you can take a picture.
-        camera.startPreview();
-    }
-
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Logger.d("surfaceDestroyed");
         // Surface will be destroyed when we return, so stop the preview.
-        if (camera != null) {
-            // Call stopPreview() to stop updating the preview surface.
-            camera.stopPreview();
+        if (cameraInstance != null) {
+            cameraInstance.stopPreview();
+            Logger.d("surfaceDestroyed ok ");
+        } else {
+            Logger.d("surfaceDestroyed null");
         }
     }
+
 
     private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
         final double ASPECT_TOLERANCE = 0.1;
@@ -242,4 +152,52 @@ public class CameraPreView extends FrameLayout implements SurfaceHolder.Callback
         }
         return optimalSize;
     }
+
+    public void previewCamera() {
+        try {
+            cameraInstance.setPreviewDisplay(getHolder());
+            cameraInstance.startPreview();
+            isPreviewRunning = true;
+        } catch (Exception e) {
+            Logger.d("Cannot start preview", e);
+        }
+    }
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Logger.d("surfaceChanged");
+        try {
+            if (isPreviewRunning) {
+                cameraInstance.stopPreview();
+            }
+
+            Camera.Parameters parameters = cameraInstance.getParameters();
+            Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+            if (display.getRotation() == Surface.ROTATION_0) {
+                parameters.setPreviewSize(height, width);
+                cameraInstance.setDisplayOrientation(90);
+            }
+
+            if (display.getRotation() == Surface.ROTATION_90) {
+                parameters.setPreviewSize(width, height);
+            }
+
+            if (display.getRotation() == Surface.ROTATION_180) {
+                parameters.setPreviewSize(height, width);
+            }
+
+            if (display.getRotation() == Surface.ROTATION_270) {
+                parameters.setPreviewSize(width, height);
+                cameraInstance.setDisplayOrientation(180);
+            }
+
+            cameraInstance.setParameters(parameters);
+            previewCamera();
+        } catch (Exception e) {
+            Logger.e("failked", e);
+        }
+    }
+
+
+
 }
