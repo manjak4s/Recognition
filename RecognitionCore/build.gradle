@@ -16,7 +16,7 @@ configurations {
 }
 
 dependencies {
-    compile project(':RecognitionEngine')
+    compile project(":RecognitionEngine")
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -42,13 +42,13 @@ aptlibs {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileVersion
-    buildToolsVersion = rootProject.ext.buildToolsVersion
+    compileSdkVersion 19
+    buildToolsVersion "20"
 
     defaultConfig {
         applicationId "support.morkva.recognition"
-        minSdkVersion rootProject.ext.minVersion
-        targetSdkVersion rootProject.ext.compileVersion
+        minSdkVersion 15
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }

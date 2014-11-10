@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
 
+
+import com.mayer.solution.Controller;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
@@ -37,6 +40,7 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         actionBar = getActionBar();
+        Controller.get();
         getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         super.onCreate(savedInstanceState);
     }
@@ -52,7 +56,6 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
 //                getActionBar().setDisplayHomeAsUpEnabled(true);
 //            }
             actionBar.setHomeButtonEnabled(false);
-
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             actionBar.addTab(actionBar.newTab().setText(R.string.title_scan).setIcon(R.drawable.ic_crop).setTabListener(this));
             actionBar.addTab(actionBar.newTab().setText(R.string.title_calculate).setIcon(R.drawable.ic_calculate).setTabListener(this));
