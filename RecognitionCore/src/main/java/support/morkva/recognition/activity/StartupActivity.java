@@ -57,7 +57,7 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
 //            }
             actionBar.setHomeButtonEnabled(false);
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            actionBar.addTab(actionBar.newTab().setText(R.string.title_scan).setIcon(R.drawable.ic_crop).setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText(Controller.get().getNewOperator().getTestString()).setIcon(R.drawable.ic_crop).setTabListener(this));
             actionBar.addTab(actionBar.newTab().setText(R.string.title_calculate).setIcon(R.drawable.ic_calculate).setTabListener(this));
             actionBar.addTab(actionBar.newTab().setText(R.string.title_history).setIcon(R.drawable.ic_list).setTabListener(this));
         }

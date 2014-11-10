@@ -1,13 +1,14 @@
 ext {
-    buildToolsVersion = System.env.CUSTOM_BUILDTOOLS != null ? System.env.CUSTOM_BUILDTOOLS : '19.1.0'
-    compileVersion = 19
-    minVersion = 19
+    buildToolsVersion = System.env.CUSTOM_BUILDTOOLS != null ? System.env.CUSTOM_BUILDTOOLS : '21.1.1'
+    compileVersion = 21
+    minVersion = 15
 }
 
 buildscript {
     def gradleVersion = System.env.CUSTOM_GRADLE != null ? System.env.CUSTOM_GRADLE : '0.14.1'
 
     repositories {
+        jcenter()
         if (System.env.CUSTOM_REPO != null) {
             maven { url System.env.CUSTOM_REPO }
         } else {

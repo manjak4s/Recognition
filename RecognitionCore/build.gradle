@@ -42,12 +42,12 @@ aptlibs {
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20"
+    compileSdkVersion rootProject.ext.compileVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "support.morkva.recognition"
-        minSdkVersion 15
+        minSdkVersion rootProject.ext.minVersion
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"

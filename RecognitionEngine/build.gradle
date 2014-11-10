@@ -3,21 +3,18 @@ import java.util.regex.Pattern
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20"
+    compileSdkVersion rootProject.ext.compileVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.morkva.solutions"
-        minSdkVersion 15
+        applicationId "com.morkva.solution"
+        minSdkVersion rootProject.ext.minVersion
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
 
         ndk {
             moduleName "MediatorOTG"
-            cFlags "-DANDROID_NDK -DDISABLE_IMPORTGL"
-            ldLibs "GLESv1_CM", "dl", "log"
-            stl "stlport_static"
         }
     }
 
