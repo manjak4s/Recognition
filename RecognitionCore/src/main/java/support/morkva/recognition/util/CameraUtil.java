@@ -3,6 +3,7 @@ package support.morkva.recognition.util;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.os.Build;
 
 /**
  * Created by irikhmayer on 10.11.2014.
@@ -22,13 +23,10 @@ public class CameraUtil {
 
     /** A safe way to get an instance of the Camera object. */
     public static Camera getCameraInstance(){
-        Camera c = null;
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            return  Camera.open(0); // This is the line the error occurs
+        } else {
+            return Camera.open();
         }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
     }
 }

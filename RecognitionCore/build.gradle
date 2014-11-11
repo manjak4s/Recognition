@@ -7,6 +7,7 @@ def findResDirs = {
 ext.asVersion = '1.10.0'
 ext.aaVersion = '3.0.1'
 ext.groundyVersion = '1.5'
+ext.easyCamera = '0.0.1'
 
 apply plugin: 'com.android.application'
 apply plugin: 'aptlibs'
@@ -15,8 +16,13 @@ configurations {
     apt
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile project(":RecognitionEngine")
+    compile project(":EasyCamera")
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -24,7 +30,10 @@ dependencies {
     compile "com.telly:groundy:${groundyVersion}"
     compile "org.androidannotations:androidannotations-api:${aaVersion}"
 
-    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.android.support:support-v13:21.0.0'
+
+    compile 'com.commonsware.cwac:camera:0.6.10'
 }
 
 aptlibs {

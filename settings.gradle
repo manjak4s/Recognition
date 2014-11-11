@@ -1,2 +1,3 @@
+include 'EasyCamera'
 include 'RecognitionEngine'
 include 'RecognitionCore'

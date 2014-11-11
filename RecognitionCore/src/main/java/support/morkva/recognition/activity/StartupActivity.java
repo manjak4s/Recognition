@@ -8,6 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.view.Window;
 
 
+import com.commonsware.cwac.camera.CameraHost;
+import com.commonsware.cwac.camera.CameraHostProvider;
+import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.mayer.solution.Controller;
 
 import org.androidannotations.annotations.AfterViews;
@@ -24,7 +27,7 @@ import support.morkva.recognition.adapter.TabsPagerAdapter;
  */
 @EActivity(R.layout.activity_launcher)
 @OptionsMenu(R.menu.launcher)
-public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
+public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener, CameraHostProvider{
 
     @ViewById
     protected ViewPager pager;
@@ -47,7 +50,7 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
 
     @AfterViews
     protected void init() {
-        fragmentAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        fragmentAdapter = new TabsPagerAdapter(getFragmentManager());
         pager.setAdapter(fragmentAdapter);
         pager.setOnPageChangeListener(this);
         if (actionBar != null) {
@@ -96,5 +99,10 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
         // Do nothing
+    }
+
+    @Override
+    public CameraHost getCameraHost() {
+        return(new SimpleCameraHost(this));
     }
 }

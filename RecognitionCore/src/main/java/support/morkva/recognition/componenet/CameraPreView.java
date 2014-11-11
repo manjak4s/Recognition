@@ -17,6 +17,7 @@ import org.androidannotations.annotations.EView;
 import java.io.IOException;
 import java.util.List;
 
+import support.morkva.recognition.util.CameraUtil;
 import support.morkva.recognition.util.Logger;
 
 /**
@@ -53,7 +54,7 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
         holderInstance.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-    public void setCamera(Camera camera) {
+    public synchronized void setCamera(Camera camera) {
         cameraInstance = camera;
         if (cameraInstance != null) {
             Logger.d("setCamera ok");
@@ -97,14 +98,16 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, acquire the camera and tell it where
         // to draw.
+        cameraInstance = CameraUtil.getCameraInstance();
         try {
             if (cameraInstance != null) {
-                cameraInstance.setPreviewDisplay(holder);
+//                cameraInstance.setPreviewDisplay(holder);
+                previewCamera();
                 Logger.d("surfaceCreated ok");
             } else {
                 Logger.d("surfaceCreated null");
             }
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             Log.e(TAG, "IOException caused by setPreviewDisplay()", exception);
         }
     }
@@ -154,7 +157,7 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
         return optimalSize;
     }
 
-    public void previewCamera() {
+    public synchronized void previewCamera() {
         try {
             cameraInstance.setPreviewDisplay(getHolder());
             cameraInstance.startPreview();
@@ -196,7 +199,7 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
                 cameraInstance.setDisplayOrientation(180);
             }
 
-            cameraInstance.setParameters(parameters);
+//            cameraInstance.setParameters(parameters);
             previewCamera();
         } catch (Exception e) {
             Logger.e("failked", e);
