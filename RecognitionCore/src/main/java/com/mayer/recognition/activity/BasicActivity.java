@@ -1,15 +1,12 @@
-package support.morkva.recognition.activity;
+package com.mayer.recognition.activity;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
-
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Fullscreen;
 
-import support.morkva.recognition.RecognitionApplication;
+import com.mayer.recognition.RecognitionApplication;
 
 /**
  * Created by irikhmayer on 06.11.2014.

@@ -1,4 +1,4 @@
-package support.morkva.recognition.util;
+package com.mayer.recognition.util;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

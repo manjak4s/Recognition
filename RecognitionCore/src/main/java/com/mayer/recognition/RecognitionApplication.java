@@ -1,14 +1,12 @@
-package support.morkva.recognition;
+package com.mayer.recognition;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.pm.PackageManager;
+
+import com.mayer.recognition.util.CameraUtil;
+import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EApplication;
-
-import support.morkva.recognition.util.CameraUtil;
-import support.morkva.recognition.util.Logger;
 
 /**
  * Created by irikhmayer on 06.11.2014.

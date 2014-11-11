@@ -1,9 +1,9 @@
-package support.morkva.recognition.util;
+package com.mayer.recognition.util;
 
 import android.os.Bundle;
 import android.util.Log;
 
-import support.morkva.recognition.BuildConfig;
+import com.mayer.recognition.BuildConfig;
 
 
 /**

@@ -22,7 +22,6 @@ repositories {
 
 dependencies {
     compile project(":RecognitionEngine")
-    compile project(":EasyCamera")
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -55,7 +54,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "support.morkva.recognition"
+        applicationId "com.mayer.recognition"
         minSdkVersion rootProject.ext.minVersion
         targetSdkVersion 20
         versionCode 1

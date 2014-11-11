@@ -1,4 +1,4 @@
-package support.morkva.recognition.fragment;
+package com.mayer.recognition.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

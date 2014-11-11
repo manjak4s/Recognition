@@ -1,4 +1,4 @@
-package support.morkva.recognition.activity;
+package com.mayer.recognition.activity;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
-
 
 import com.commonsware.cwac.camera.CameraHost;
 import com.commonsware.cwac.camera.CameraHostProvider;
@@ -19,8 +18,8 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import support.morkva.recognition.R;
-import support.morkva.recognition.adapter.TabsPagerAdapter;
+import com.mayer.recognition.R;
+import com.mayer.recognition.adapter.TabsPagerAdapter;
 
 /**
  * Created by irikhmayer on 06.11.2014.

@@ -4,9 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.commonsware.cwac.camera.CameraView
+    <support.morkva.recognition.componenet.CameraPreView_
         android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <!--<com.commonsware.cwac.camera.CameraView-->
+        <!--android:id="@+id/camera"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 </LinearLayout>

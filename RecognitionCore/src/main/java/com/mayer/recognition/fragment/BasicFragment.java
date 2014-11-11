@@ -1,8 +1,8 @@
-package support.morkva.recognition.fragment;
+package com.mayer.recognition.fragment;
 
 import android.support.v4.app.Fragment;
 
-import support.morkva.recognition.RecognitionApplication;
+import com.mayer.recognition.RecognitionApplication;
 
 /**
  * Created by irikhmayer on 10.11.2014.
