@@ -21,10 +21,6 @@ import com.mayer.recognition.componenet.CameraPreView;
 @EFragment(R.layout.camera_preview_fragment)
 public class CameraPreviewFragment extends CameraFragment {
 
-
-    @ViewById(R.id.camera)
-    protected CameraPreView camera;
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
