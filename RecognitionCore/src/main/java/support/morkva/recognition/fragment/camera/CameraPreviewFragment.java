@@ -32,28 +32,53 @@ public class CameraPreviewFragment extends BasicFragment {
 
     @Override
     public void onResume() {
-        Logger.d("onResume");
         super.onResume();
-        int numCams = Camera.getNumberOfCameras();
-        if (numCams > 0) {
-            try {
-                camera = Camera.open(0);
-                camera.startPreview();
-                surfaceCameraComponent.setCamera(camera);
-            } catch (RuntimeException ex) {
-                Logger.e("failed", ex);
+        Logger.d("visible is " + isVisible());
+        if (getUserVisibleHint() || true) {
+            Logger.d("onResume ok");
+            int numCams = Camera.getNumberOfCameras();
+            if (numCams > 0) {
+                try {
+                    camera = Camera.open(0);
+                    camera.startPreview();
+                    surfaceCameraComponent.setCamera(camera);
+                } catch (RuntimeException ex) {
+                    Logger.e("failed", ex);
+                }
             }
+        } else {
+            Logger.d("onResume no");
         }
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
 
+        // Make sure that we are currently visible
+        if (this.isVisible()) {
+            // If we are becoming invisible, then...
+            if (!isVisibleToUser) {
+                Logger.d("Not visible anymore.  Stopping audio.");
+                // TODO stop audio playback
+            }
+        } else {
+
+            Logger.d("visible!");
+        }
+    }
     @Override
     public void onPause() {
-        Logger.d("onPause");
-        if (camera != null) {
-            camera.stopPreview();
-            surfaceCameraComponent.setCamera(null);
-            camera.release();
-            camera = null;
+        if (!getUserVisibleHint() || true) {
+            Logger.d("onPause");
+            if (camera != null) {
+                camera.stopPreview();
+                surfaceCameraComponent.setCamera(null);
+                camera.release();
+                camera = null;
+            }
+        } else {
+            Logger.d("onResume no");
+
         }
         super.onPause();
     }

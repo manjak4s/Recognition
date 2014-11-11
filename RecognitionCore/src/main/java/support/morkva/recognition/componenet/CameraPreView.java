@@ -54,7 +54,6 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void setCamera(Camera camera) {
-        Logger.d("setCamera");
         cameraInstance = camera;
         if (cameraInstance != null) {
             Logger.d("setCamera ok");
@@ -78,7 +77,7 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Logger.d("onMeasure");
+
         // We purposely disregard child measurements because act as a
         // wrapper to a SurfaceView that centers the camera preview instead
         // of stretching it.
@@ -86,8 +85,11 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
         final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
         setMeasuredDimension(width, height);
 
-        if (mSupportedPreviewSizes != null) {
+        if (mSupportedPreviewSizes != null && cameraInstance != null) {
             previewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
+            Logger.d("onMeasure ok");
+        } else {
+            Logger.d("onMeasure false");
         }
     }
 
@@ -109,7 +111,6 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Logger.d("surfaceDestroyed");
         // Surface will be destroyed when we return, so stop the preview.
         if (cameraInstance != null) {
             cameraInstance.stopPreview();
@@ -164,7 +165,11 @@ public class CameraPreView extends SurfaceView implements SurfaceHolder.Callback
     }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Logger.d("surfaceChanged");
+        if (cameraInstance == null) {
+            Logger.d("surfaceChanged null");
+            return;
+        }
+        Logger.d("surfaceChanged ok");
         try {
             if (isPreviewRunning) {
                 cameraInstance.stopPreview();
