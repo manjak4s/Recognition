@@ -10,6 +10,7 @@ import android.view.Window;
 import com.commonsware.cwac.camera.CameraHost;
 import com.commonsware.cwac.camera.CameraHostProvider;
 import com.commonsware.cwac.camera.SimpleCameraHost;
+import com.mayer.recognition.fragment.camera.DemoCameraFragment;
 import com.mayer.solution.Controller;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,7 +27,7 @@ import com.mayer.recognition.adapter.TabsPagerAdapter;
  */
 @EActivity(R.layout.activity_launcher)
 @OptionsMenu(R.menu.launcher)
-public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener, CameraHostProvider{
+public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener, CameraHostProvider, DemoCameraFragment.Contract {
 
     @ViewById
     protected ViewPager pager;
@@ -103,5 +104,15 @@ public class StartupActivity extends BasicActivity implements ActionBar.TabListe
     @Override
     public CameraHost getCameraHost() {
         return(new SimpleCameraHost(this));
+    }
+
+    @Override
+    public boolean isSingleShotMode() {
+        return false;
+    }
+
+    @Override
+    public void setSingleShotMode(boolean mode) {
+
     }
 }
