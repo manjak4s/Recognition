@@ -12,14 +12,14 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="60dp"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="60dp"
         android:src="@drawable/ic_launcher"/>
 
-    <SeekBar
+    <com.mayer.recognition.componenet.VerticalSeekBar
+        android:layout_gravity="right|center_vertical"
         android:id="@+id/zoom"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 </FrameLayout>
 

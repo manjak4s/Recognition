@@ -10,7 +10,7 @@ import android.view.Window;
 import com.commonsware.cwac.camera.CameraHost;
 import com.commonsware.cwac.camera.CameraHostProvider;
 import com.commonsware.cwac.camera.SimpleCameraHost;
-import com.mayer.recognition.fragment.camera.DemoCameraFragment;
+import com.mayer.recognition.fragment.camera.PreviewCameraFragment;
 import com.mayer.solution.Controller;
 
 import org.androidannotations.annotations.AfterViews;
@@ -27,7 +27,7 @@ import com.mayer.recognition.adapter.TabsPagerAdapter;
  */
 @EActivity(R.layout.activity_launcher)
 @OptionsMenu(R.menu.launcher)
-public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener, CameraHostProvider, DemoCameraFragment.Contract {
+public class StartupActivity extends BasicActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener, CameraHostProvider, PreviewCameraFragment.Contract {
 
     @ViewById
     protected ViewPager pager;

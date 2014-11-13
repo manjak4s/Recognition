@@ -5,8 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import com.mayer.recognition.fragment.TestFragment;
-import com.mayer.recognition.fragment.camera.DemoCameraFragment;
-import com.mayer.recognition.fragment.camera.DemoCameraFragment_;
+import com.mayer.recognition.fragment.camera.PreviewCameraFragment_;
 
 /**
  * Created by asuprun on 23.07.2014.
@@ -28,7 +27,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new DemoCameraFragment_();//.newInstance(false);
+                return new PreviewCameraFragment_();//.newInstance(false);
             case 1:
                 return  TestFragment.newInstance(CONTENT[position % CONTENT.length]);
             case 2:

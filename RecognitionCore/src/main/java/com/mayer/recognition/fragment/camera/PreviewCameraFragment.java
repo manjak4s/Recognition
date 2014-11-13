@@ -16,12 +16,10 @@ package com.mayer.recognition.fragment.camera;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.Face;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 import com.commonsware.cwac.camera.CameraFragment;
@@ -40,7 +37,6 @@ import com.commonsware.cwac.camera.CameraView;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.commonsware.cwac.camera.PictureTransaction;
 import com.mayer.recognition.R;
-import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -50,9 +46,9 @@ import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.SeekBarProgressChange;
 import org.androidannotations.annotations.ViewById;
 
-@EFragment(R.layout.fragment)
+@EFragment(R.layout.camera_preview_fragment)
 @OptionsMenu(R.menu.camera)
-public class DemoCameraFragment extends CameraFragment {
+public class PreviewCameraFragment extends CameraFragment {
 
     protected static final String KEY_USE_FFC = "com.commonsware.cwac.camera.demo.USE_FFC";
 
@@ -87,7 +83,6 @@ public class DemoCameraFragment extends CameraFragment {
     protected CameraView camera;
 
     protected boolean singleShotProcessing = false;
-    protected long lastFaceToast = 0L;
     protected String flashMode = null;
 
     @Override
@@ -96,7 +91,7 @@ public class DemoCameraFragment extends CameraFragment {
     }
 
     public CameraHost getHost() {
-        return new SimpleCameraHost.Builder(new DemoCameraHost(getActivity())).useFullBleedPreview(true).build();
+        return new SimpleCameraHost.Builder(new MayerCameraHost(getActivity())).useFullBleedPreview(true).build();
     }
 
     @AfterViews
@@ -180,15 +175,15 @@ public class DemoCameraFragment extends CameraFragment {
     }
 
     @SeekBarProgressChange(R.id.zoom)
-    void onProgressChangeOnSeekBar(SeekBar seekBar, int progress, boolean fromUser) {
+    void onProgressChangeOnSeekBar(final SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser) {
             return;
         }
-        zoom.setEnabled(false);
-        zoomTo(zoom.getProgress()).onComplete(new Runnable() {
+        seekBar.setEnabled(false);
+        zoomTo(progress).onComplete(new Runnable() {
             @Override
             public void run() {
-                zoom.setEnabled(true);
+                seekBar.setEnabled(true);
             }
         }).go();
     }
@@ -232,12 +227,10 @@ public class DemoCameraFragment extends CameraFragment {
         void setSingleShotMode(boolean mode);
     }
 
-    class DemoCameraHost extends SimpleCameraHost implements
-            Camera.FaceDetectionListener {
-        boolean supportsFaces = false;
+    protected class MayerCameraHost extends SimpleCameraHost implements Camera.FaceDetectionListener {
 
-        public DemoCameraHost(Context _ctxt) {
-            super(_ctxt);
+        public MayerCameraHost(Context ctxt) {
+            super(ctxt);
         }
 
         @Override
@@ -281,9 +274,6 @@ public class DemoCameraFragment extends CameraFragment {
         public void autoFocusAvailable() {
             if (autoFocusItem != null) {
                 autoFocusItem.setEnabled(true);
-
-                if (supportsFaces)
-                    startFaceDetection();
             }
         }
 
@@ -291,72 +281,47 @@ public class DemoCameraFragment extends CameraFragment {
         public void autoFocusUnavailable() {
             if (autoFocusItem != null) {
                 stopFaceDetection();
-
-                if (supportsFaces)
-                    autoFocusItem.setEnabled(false);
             }
         }
 
         @Override
         public void onCameraFail(CameraHost.FailureReason reason) {
             super.onCameraFail(reason);
-
-            Toast.makeText(getActivity(),
-                    "Sorry, but you cannot use the camera now!",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Sorry, but you cannot use the camera now!", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public Parameters adjustPreviewParameters(Parameters parameters) {
-            Logger.d("ping!");
-            flashMode =
-                    CameraUtils.findBestFlashModeMatch(parameters,
+            flashMode = CameraUtils.findBestFlashModeMatch(parameters,
                             Camera.Parameters.FLASH_MODE_RED_EYE,
                             Camera.Parameters.FLASH_MODE_AUTO,
                             Camera.Parameters.FLASH_MODE_ON);
 
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 zoom.setMax(parameters.getMaxZoom());
-//                zoom.setOnSeekBarChangeListener(DemoCameraFragment.this);
+                zoom.setEnabled(true);
             } else {
                 zoom.setEnabled(false);
             }
 
-            if (parameters.getMaxNumDetectedFaces() > 0) {
-                supportsFaces = true;
-            } else {
-                Toast.makeText(getActivity(),
-                        "Face detection not available for this camera",
-                        Toast.LENGTH_LONG).show();
-            }
-
-            return (super.adjustPreviewParameters(parameters));
+            return super.adjustPreviewParameters(parameters);
         }
 
         @Override
         public void onFaceDetection(Face[] faces, Camera camera) {
-            if (faces.length > 0) {
-                long now = SystemClock.elapsedRealtime();
-
-                if (now > lastFaceToast + 10000) {
-                    Toast.makeText(getActivity(), "I see your face!",
-                            Toast.LENGTH_LONG).show();
-                    lastFaceToast = now;
-                }
-            }
+            // ignore
         }
 
         @Override
         @TargetApi(16)
         public void onAutoFocus(boolean success, Camera camera) {
             super.onAutoFocus(success, camera);
-
             takePictureItem.setEnabled(true);
         }
 
         @Override
         public boolean mirrorFFC() {
-            return (mirrorFFC.isChecked());
+            return mirrorFFC.isChecked();
         }
     }
 }
