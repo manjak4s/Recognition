@@ -37,9 +37,12 @@ import com.commonsware.cwac.camera.CameraView;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.commonsware.cwac.camera.PictureTransaction;
 import com.mayer.recognition.R;
+import com.mayer.recognition.componenet.VerticalSeekBar;
+import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.OptionsMenuItem;
@@ -85,6 +88,10 @@ public class PreviewCameraFragment extends CameraFragment {
     protected boolean singleShotProcessing = false;
     protected String flashMode = null;
 
+    @InstanceState
+    protected int zoomLevel;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return null;
@@ -100,6 +107,8 @@ public class PreviewCameraFragment extends CameraFragment {
         setRecordingItemVisibility();
         zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
+        Logger.d("init");
+        Logger.d("zoom instanceof VerticalSeekBar " + (zoom instanceof VerticalSeekBar));
     }
 
     @Override
@@ -175,7 +184,7 @@ public class PreviewCameraFragment extends CameraFragment {
     }
 
     @SeekBarProgressChange(R.id.zoom)
-    void onProgressChangeOnSeekBar(final SeekBar seekBar, int progress, boolean fromUser) {
+    void onProgressChangeOnSeekBar(final SeekBar seekBar, final int progress, boolean fromUser) {
         if (!fromUser) {
             return;
         }
@@ -183,6 +192,8 @@ public class PreviewCameraFragment extends CameraFragment {
         zoomTo(progress).onComplete(new Runnable() {
             @Override
             public void run() {
+                zoomLevel = progress;
+
                 seekBar.setEnabled(true);
             }
         }).go();
@@ -195,8 +206,7 @@ public class PreviewCameraFragment extends CameraFragment {
 
     void setRecordingItemVisibility() {
         if (zoom != null && recordItem != null) {
-            if (getDisplayOrientation() != 0
-                    && getDisplayOrientation() != 180) {
+            if (getDisplayOrientation() != 0 && getDisplayOrientation() != 180) {
                 recordItem.setVisible(false);
             }
         }
@@ -221,13 +231,24 @@ public class PreviewCameraFragment extends CameraFragment {
         takePicture(xact);
     }
 
+
+    protected void zoom() {
+        if (zoomLevel > 0) {
+            if (zoom instanceof VerticalSeekBar) {
+                ((VerticalSeekBar) zoom).setProgressAndThumb(zoomLevel);
+            } else {
+                zoom.setProgress(zoomLevel);
+            }
+        }
+    }
+
     public interface Contract {
         boolean isSingleShotMode();
 
         void setSingleShotMode(boolean mode);
     }
 
-    protected class MayerCameraHost extends SimpleCameraHost implements Camera.FaceDetectionListener {
+    protected class MayerCameraHost extends SimpleCameraHost {
 
         public MayerCameraHost(Context ctxt) {
             super(ctxt);
@@ -272,9 +293,11 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public void autoFocusAvailable() {
+
             if (autoFocusItem != null) {
                 autoFocusItem.setEnabled(true);
             }
+            zoom();
         }
 
         @Override
@@ -300,16 +323,12 @@ public class PreviewCameraFragment extends CameraFragment {
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 zoom.setMax(parameters.getMaxZoom());
                 zoom.setEnabled(true);
+
             } else {
                 zoom.setEnabled(false);
             }
-
-            return super.adjustPreviewParameters(parameters);
-        }
-
-        @Override
-        public void onFaceDetection(Face[] faces, Camera camera) {
-            // ignore
+            Parameters params = super.adjustPreviewParameters(parameters);
+            return params;
         }
 
         @Override
