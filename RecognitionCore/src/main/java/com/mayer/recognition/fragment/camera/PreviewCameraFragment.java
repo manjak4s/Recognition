@@ -238,6 +238,7 @@ public class PreviewCameraFragment extends CameraFragment {
                 ((VerticalSeekBar) zoom).setProgressAndThumb(zoomLevel);
             } else {
                 zoom.setProgress(zoomLevel);
+                onProgressChangeOnSeekBar(zoom, zoomLevel, true);
             }
         }
     }
