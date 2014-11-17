@@ -212,8 +212,8 @@ public class PreviewCameraFragment extends CameraFragment {
         }
     }
 
-    Contract getContract() {
-        return ((Contract) getActivity());
+    protected Contract getContract() {
+        return (Contract) getActivity();
     }
 
     public void takeSimplePicture() {

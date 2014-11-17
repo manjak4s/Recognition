@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- When selected, use grey -->
+    <item android:drawable="@drawable/ic_take_a_photo" android:state_pressed="false" />
+    <!-- When not selected, use white-->
+    <item android:drawable="@drawable/ic_take_a_photo_pressed" android:state_pressed="true"/>
+</selector>

@@ -9,17 +9,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/ic_launcher"/>
 
-    <SeekBar
-        android:id="@+id/zoom"
+
+    <RelativeLayout
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="140dp">
+
+        <ImageView
+            android:background="@android:drawable/screen_background_dark"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:alpha="0.3" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <com.mayer.recognition.componenet.CameraControlsView_
+            android:layout_alignParentLeft="true"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/controls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:id="@+id/take_picture"
+            android:background="@null"
+            android:src="@drawable/take_a_photo" />
+
+        <SeekBar
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:id="@+id/zoom"
+            android:layout_below="@id/take_picture"
+            android:progressDrawable="@drawable/seek_progress"
+            android:thumb="@drawable/seek_control"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
 </FrameLayout>
 
