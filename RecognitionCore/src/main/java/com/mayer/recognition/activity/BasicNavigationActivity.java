@@ -1,138 +1,105 @@
 package com.mayer.recognition.activity;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
+import com.commonsware.cwac.camera.CameraHost;
+import com.commonsware.cwac.camera.CameraHostProvider;
+import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.mayer.recognition.R;
-import com.mayer.recognition.fragment.BasicDrawerFragment;
+import com.mayer.recognition.adapter.DrawerManuAdapter;
+import com.mayer.recognition.fragment.camera.PreviewCameraFragment;
+import com.mayer.recognition.fragment.camera.PreviewCameraFragment_;
+import com.mayer.recognition.model.ui.TabViewModel;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by dot on 16.11.2014.
  */
 @EActivity(R.layout.activity_main)
-public class BasicNavigationActivity extends ActionBarActivity implements BasicDrawerFragment.NavigationDrawerCallbacks {
+@OptionsMenu(R.menu.launcher)
+public class BasicNavigationActivity extends ActionBarActivity implements CameraHostProvider,
+                                                                          PreviewCameraFragment.Contract {
 
-    @FragmentById(R.id.navigation_drawer)
-    protected BasicDrawerFragment mNavigationDrawerFragment;
+    @ViewById
+    protected Toolbar toolbar;
 
-    private CharSequence mTitle;
+    @ViewById
+    protected DrawerLayout drawerLayout;
+
+    @ViewById
+    protected RecyclerView navigationDrawer;
+
+    @InstanceState
+    protected CharSequence navigatorTitle;
+
+    protected DrawerManuAdapter drawerAdapter;
+
+    private ActionBarDrawerToggle toggle;
+
+    protected static final List<TabViewModel> TABS;
+
+    static {
+        TABS = new ArrayList<TabViewModel>();
+        TABS.add(0, new TabViewModel() {
+            @Override
+            public Fragment getFragmentInstance() {
+                return new PreviewCameraFragment_();
+            }
+
+            @Override
+            public String getTitle() {
+                return "Test";
+            }
+        });
+    }
 
     @AfterViews
     protected void init() {
-        mTitle = getTitle();
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        setSupportActionBar(toolbar);
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+
+        toggle.setDrawerIndicatorEnabled(true);
+        drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationDrawer.setLayoutManager(new LinearLayoutManager(this));
+
+        navigationDrawer.setHasFixedSize(true);
+        drawerAdapter = new DrawerManuAdapter(this);
+        drawerAdapter.setList(TABS);
+        navigationDrawer.setAdapter(drawerAdapter);
+
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.flash);
-                break;
-            case 2:
-                mTitle = getString(R.string.flash);
-                break;
-            case 3:
-                mTitle = getString(R.string.flash);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.camera, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+    public CameraHost getCameraHost() {
+        return(new SimpleCameraHost(this));
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public boolean isSingleShotMode() {
+        return false;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    @Override
+    public void setSingleShotMode(boolean mode) {
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((BasicNavigationActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 }

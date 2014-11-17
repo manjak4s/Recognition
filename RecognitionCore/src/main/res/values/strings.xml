@@ -22,4 +22,7 @@
     <string name="flash">Flash</string>
     <string name="launch_full_screen">Launch Full-Screen</string>
     <string name="mirror_ffc">Mirror FFC</string>
+
+    <string name="close">Close</string>
+    <string name="open">Open</string>
 </resources>
