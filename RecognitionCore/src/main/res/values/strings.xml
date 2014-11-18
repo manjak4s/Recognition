@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Check IT!</string>
-    <string name="title_activity_launcher">Check Buddy</string>
+    <string name="app_name">Bill Buddy</string>
+    <string name="title_activity_launcher">Bill Recognition</string>
     <string name="title_scan">Scan !</string>
     <string name="title_calculate">Results</string>
     <string name="title_history">History</string>

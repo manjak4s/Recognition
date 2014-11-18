@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         app:theme="@style/Theme.ToolbarOverflow"
@@ -20,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/container"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -30,7 +32,7 @@
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/color_accent" />
 
     </android.support.v4.widget.DrawerLayout>
 

@@ -4,17 +4,62 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
+import com.mayer.recognition.R;
 import com.mayer.recognition.fragment.TestFragment;
 import com.mayer.recognition.fragment.camera.PreviewCameraFragment_;
+import com.mayer.recognition.model.ui.TabViewModel;
+import com.mayer.recognition.util.ResourceHelper;
 
-/**
- * Created by asuprun on 23.07.2014.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-    private static final String[] CONTENT = new String[] { "Scan!", "Calculate", "History" };
+
+    protected static final List<TabViewModel> TABS;
+
+    static {
+        TABS = new ArrayList<TabViewModel>();
+        TABS.add(0, new TabViewModel() {
+            @Override
+            public Fragment getFragmentInstance() {
+                return new PreviewCameraFragment_();
+            }
+
+            @Override
+            public String getTitle() {
+                return ResourceHelper.getString(R.string.title_scan);
+            }
+        });
+        TABS.add(1, new TabViewModel() {
+            @Override
+            public Fragment getFragmentInstance() {
+                return new PreviewCameraFragment_();
+            }
+
+            @Override
+            public String getTitle() {
+                return ResourceHelper.getString(R.string.title_calculate);
+            }
+        });
+        TABS.add(2, new TabViewModel() {
+            @Override
+            public Fragment getFragmentInstance() {
+                return new PreviewCameraFragment_();
+            }
+
+            @Override
+            public String getTitle() {
+                return ResourceHelper.getString(R.string.title_history);
+            }
+        });
+    }
 
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+    public static List<TabViewModel> getTabs() {
+        return TABS;
     }
 
     @Override
@@ -25,19 +70,12 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new PreviewCameraFragment_();//.newInstance(false);
-            case 1:
-                return  TestFragment.newInstance(CONTENT[position % CONTENT.length]);
-            case 2:
-                return  TestFragment.newInstance(CONTENT[position % CONTENT.length]);
-        }
-        return null;
+        return TABS.get(position).getFragmentInstance();
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return TABS.size();
     }
+
 }

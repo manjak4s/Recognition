@@ -119,6 +119,10 @@ public class PreviewCameraFragment extends CameraFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (singleShotItem == null) {
+            return;
+        }
         singleShotItem.setChecked(getContract().isSingleShotMode());
         if (isRecording()) {
             recordItem.setVisible(false);

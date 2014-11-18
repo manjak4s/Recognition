@@ -1,4 +1,4 @@
-package com.mayer.recognition.componenet;
+package com.mayer.recognition.componenet.camera;
 
 import android.content.Context;
 import android.util.AttributeSet;

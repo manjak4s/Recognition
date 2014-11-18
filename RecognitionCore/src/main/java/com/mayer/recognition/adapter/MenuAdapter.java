@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mayer.recognition.util.Logger;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -23,8 +25,9 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
         this.ctx = ctx;
     }
 
-    public void setOnListItemClickListener(IListClickListener listener) {
+    public MenuAdapter setOnListItemClickListener(IListClickListener listener) {
         this.listener = listener;
+        return this;
     }
 
     public void setList(List<ViewModel> list) {
@@ -37,7 +40,15 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
 
     @Override
     public ViewHolder<ViewType> onCreateViewHolder(ViewGroup viewGroup, final int pos) {
-        return new ViewHolder<ViewType>(newView(ctx, viewGroup, pos)).setListener(new ViewHolder.IItemViewClickListener() {
+        Logger.d("debug pos + " + pos);
+        ViewType view = newView(ctx, viewGroup, pos);
+        return new ViewHolder<ViewType>(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder<ViewType> viewHolder, final int pos) {
+        Logger.d("debug pos1 + " + pos);
+        viewHolder.setListener(new ViewHolder.IItemViewClickListener() {
 
             @Override
             public void onClick(final View caller) {
@@ -53,10 +64,6 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
                 }
             }
         });
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder<ViewType> viewHolder, int pos) {
         bind(list.get(pos), viewHolder.view);
     }
 
@@ -82,6 +89,7 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    view.requestFocus();
                     listener.onClick(v);
                 }
             });

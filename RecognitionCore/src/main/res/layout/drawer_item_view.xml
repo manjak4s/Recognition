@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/drawer_tab_selector"
+    android:padding="10dp"
+    android:layout_width="240dp"
     android:layout_height="match_parent">
 
     <TextView
+        android:duplicateParentState="true"
         android:id="@+id/name"
         android:text="test"
         style="@style/TabViewItem.Normal"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
