@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.mayer.recognition.componenet.drawer.DrawerView;
 import com.mayer.recognition.componenet.drawer.DrawerView_;
 import com.mayer.recognition.model.ui.TabViewModel;
+import com.mayer.recognition.util.Logger;
 
 /**
  * Created by irikhmayer on 17.11.2014.
@@ -18,6 +19,7 @@ public class DrawerManuAdapter extends MenuAdapter<TabViewModel, DrawerView> {
 
     @Override
     protected DrawerView newView(Context ctx, ViewGroup viewGroup, int pos) {
+        Logger.d("hello " + pos);
         return DrawerView_.build(ctx);
     }
 

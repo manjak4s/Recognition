@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mayer.recognition.R;
+import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
@@ -33,7 +34,9 @@ public class DrawerView extends LinearLayout {
     }
 
     @AfterViews
-    protected void init() {}
+    protected void init() {
+        Logger.d("itemview init");
+    }
 
     public void bind(String title) {
         name.setText(title);

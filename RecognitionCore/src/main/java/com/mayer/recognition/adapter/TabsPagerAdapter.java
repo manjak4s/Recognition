@@ -8,6 +8,7 @@ import com.mayer.recognition.R;
 import com.mayer.recognition.fragment.TestFragment;
 import com.mayer.recognition.fragment.camera.PreviewCameraFragment_;
 import com.mayer.recognition.model.ui.TabViewModel;
+import com.mayer.recognition.util.Logger;
 import com.mayer.recognition.util.ResourceHelper;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     }
 
     public static List<TabViewModel> getTabs() {
+        Logger.d("size is " + TABS.size());
         return TABS;
     }
 

@@ -107,8 +107,6 @@ public class PreviewCameraFragment extends CameraFragment {
         setRecordingItemVisibility();
         zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
-        Logger.d("init");
-        Logger.d("zoom instanceof VerticalSeekBar " + (zoom instanceof VerticalSeekBar));
     }
 
     @Override
@@ -119,11 +117,12 @@ public class PreviewCameraFragment extends CameraFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        if (singleShotItem == null) {
+        if (getActivity() == null) {
             return;
         }
         singleShotItem.setChecked(getContract().isSingleShotMode());
+        Logger.d("isRecording() is " + (isRecording()));
+
         if (isRecording()) {
             recordItem.setVisible(false);
             stopRecordItem.setVisible(true);

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.mayer.recognition.util.Logger;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,23 +17,55 @@ import java.util.List;
  */
 public abstract class MenuAdapter<ViewModel, ViewType extends View> extends RecyclerView.Adapter<MenuAdapter.ViewHolder<ViewType>> {
 
-    private List<ViewModel> list = Collections.emptyList();
+    private List<ViewModel> list = new ArrayList<ViewModel>();
     private Context ctx;
 
-    private IListClickListener listener;
+    private AdapterView.OnItemClickListener listener;
 
     public MenuAdapter(Context ctx) {
         super();
         this.ctx = ctx;
     }
 
-    public MenuAdapter setOnListItemClickListener(IListClickListener listener) {
-        this.listener = listener;
+    public MenuAdapter setOnListItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
+        this.listener = onItemClickListener;
         return this;
     }
 
     public void setList(List<ViewModel> list) {
-        this.list = list;
+        this.list.clear();
+        this.list.addAll(list);
+
+        notifyDataSetChanged();
+    }
+
+    /*
+     * Inserting a new item at the head of the list. This uses a specialized
+     * RecyclerView method, notifyItemInserted(), to trigger any enabled item
+     * animations in addition to updating the view.
+     */
+    public void addItem(ViewModel item) {
+        list.add(0, item);
+        notifyItemInserted(0);
+    }
+
+    /*
+     * Inserting a new item at the head of the list. This uses a specialized
+     * RecyclerView method, notifyItemRemoved(), to trigger any enabled item
+     * animations in addition to updating the view.
+     */
+    public void removeItem() {
+        if (list.isEmpty()) return;
+
+        list.remove(0);
+        notifyItemRemoved(0);
+    }
+
+    public void removeAllItems() {
+        if (list.isEmpty()) return;
+
+        list.clear();
+        notifyDataSetChanged();
     }
 
     public List<ViewModel> getList() {
@@ -45,20 +79,19 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder<ViewType> viewHolder, final int pos) {
+    public void onBindViewHolder(final ViewHolder<ViewType> viewHolder, final int pos) {
         viewHolder.setListener(new ViewHolder.IItemViewClickListener() {
 
             @Override
             public void onClick(final View caller) {
                 if (listener != null) {
-                    listener.onClick(caller, pos);
+                    listener.onItemClick(null, viewHolder.itemView, viewHolder.getPosition(), viewHolder.getItemId());
                 }
             }
 
             @Override
             public void onLongClick(final View caller) {
                 if (listener != null) {
-                    listener.onLongClick(caller, pos);
                 }
             }
         });
@@ -107,12 +140,5 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
             public void onLongClick(View caller);
         }
 
-    }
-
-    public static interface IListClickListener {
-
-        void onClick(View caller, int pos);
-
-        void onLongClick(View caller, int pos);
     }
 }

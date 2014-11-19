@@ -5,33 +5,38 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 
 import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EView;
+import org.androidannotations.annotations.UiThread;
 
 /**
  * Created by dot on 19.11.2014.
  */
 @EView
-public class SmartDrawer extends RecyclerView {
+public class SmartDrawerRecyclerView extends RecyclerView {
 
-    public SmartDrawer(Context context) {
+    protected int lastSelection;
+
+    public SmartDrawerRecyclerView(Context context) {
         super(context);
     }
 
-    public SmartDrawer(Context context, AttributeSet attrs) {
+    public SmartDrawerRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SmartDrawer(Context context, AttributeSet attrs, int defStyle) {
+    public SmartDrawerRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     @AfterViews
     protected void init() {
-        setLayoutManager(new LinearLayoutManager(getContext()));
+        setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         setItemAnimator(new DefaultItemAnimator());
         setHasFixedSize(true);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
@@ -39,8 +44,12 @@ public class SmartDrawer extends RecyclerView {
     }
 
     public void navigateTo(int position) {
-        Logger.d("navigated to " + position);
-        getChildAt(position).requestFocus();
+        lastSelection = position;
+        View view = getChildAt(position);
+        Logger.d("hello position " + position);
+        if (view != null && !view.isFocused()) {
+            Logger.d("hello position done");
+            view.requestFocus();
+        }
     }
-
 }
