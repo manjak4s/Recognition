@@ -19,6 +19,8 @@
     <com.mayer.recognition.componenet.VerticalSeekBar
         android:layout_gravity="right|center_vertical"
         android:id="@+id/zoom"
+        android:progressDrawable="@drawable/progress"
+        android:thumb="@drawable/thumb"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 </FrameLayout>

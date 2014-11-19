@@ -1,5 +1,7 @@
 package com.mayer.recognition.activity;
 
+import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -75,11 +77,10 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
 
-
             private DRAWER_STATE toggleMode;
 
             public void onDrawerStateChanged(int newState) {
-                if (newState == DrawerLayout.STATE_SETTLING) {
+                if (newState == DrawerLayout.STATE_SETTLING || newState == DrawerLayout.STATE_DRAGGING) {
                     toggleMode = drawerLayout.isDrawerOpen(Gravity.LEFT) ? DRAWER_STATE.CLOSING : DRAWER_STATE.OPENING;
                 } else if (newState == DrawerLayout.STATE_IDLE) {
                     toggleMode = toggleMode == DRAWER_STATE.OPENING ? DRAWER_STATE.OPENED : DRAWER_STATE.CLOSED;

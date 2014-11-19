@@ -3,14 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:rowCount="2"
-    android:columnCount="2"
-    android:layout_height="match_parent">
+    android:columnCount="1"
+    android:layout_height="wrap_content">
 
 
     <ToggleButton
         android:id="@+id/rotateIco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/toggle_bg_size"
+        android:layout_height="@dimen/toggle_bg_size"
         android:background="@drawable/rotate"
         android:textOn=""
         android:textOff=""
@@ -19,8 +19,8 @@
 
     <ToggleButton
         android:id="@+id/flashIco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/toggle_bg_size"
+        android:layout_height="@dimen/toggle_bg_size"
         android:background="@drawable/flash"
         android:textOn=""
         android:textOff=""

@@ -1,6 +1,7 @@
 package com.mayer.recognition.componenet.drawer;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,5 +52,12 @@ public class SmartDrawerRecyclerView extends RecyclerView {
             Logger.d("hello position done");
             view.requestFocus();
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        Logger.d("onWindowFocusChanged");
+        navigateTo(lastSelection);
     }
 }

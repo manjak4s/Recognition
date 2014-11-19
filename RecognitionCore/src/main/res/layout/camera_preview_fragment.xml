@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_gravity="bottom|center_horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="140dp">
+        android:layout_height="130dp">
 
         <ImageView
             android:background="@android:drawable/screen_background_dark"
@@ -31,6 +31,7 @@
         <com.mayer.recognition.componenet.camera.CameraControlsView_
             android:layout_alignParentLeft="true"
             android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:id="@+id/controls"
             android:layout_width="match_parent"
@@ -40,21 +41,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:paddingTop="10dp"
+            android:layout_centerVertical="true"
             android:id="@+id/take_picture"
             android:background="@null"
             android:src="@drawable/take_a_photo" />
 
-        <SeekBar
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
+        <com.mayer.recognition.componenet.VerticalSeekBar
+            android:paddingLeft="20dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
             android:id="@+id/zoom"
-            android:layout_below="@id/take_picture"
-            android:progressDrawable="@drawable/seek_progress"
-            android:thumb="@drawable/seek_control"
-            android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:progressDrawable="@drawable/progress"
+            android:thumb="@drawable/thumb"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 
