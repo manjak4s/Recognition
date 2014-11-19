@@ -2,6 +2,7 @@ package com.mayer.recognition;
 
 import android.app.Application;
 
+import com.mayer.recognition.prefs.SharedPreferences_;
 import com.mayer.recognition.util.CameraUtil;
 import com.mayer.recognition.util.Logger;
 
@@ -16,6 +17,8 @@ public class RecognitionApplication extends Application {
 
     private static RecognitionApplication self;
 
+    private SharedPreferences_ shopPref;
+
     public static final RecognitionApplication get() {
         return self;
     }
@@ -28,10 +31,23 @@ public class RecognitionApplication extends Application {
         } else {
             Logger.d("Device has a cam");
         }
+        lazyInstantiateShopPref();
+        initPref();
+    }
+
+    public SharedPreferences_ getShopPref() {
+        lazyInstantiateShopPref();
+        return shopPref;
     }
 
     @Background
     public void initPref() {
 
+    }
+
+    private synchronized void lazyInstantiateShopPref() {
+        if (shopPref == null) {
+            shopPref = new SharedPreferences_(RecognitionApplication.this);
+        }
     }
 }

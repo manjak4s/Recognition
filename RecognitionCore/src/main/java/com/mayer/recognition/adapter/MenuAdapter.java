@@ -40,14 +40,12 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
 
     @Override
     public ViewHolder<ViewType> onCreateViewHolder(ViewGroup viewGroup, final int pos) {
-        Logger.d("debug pos + " + pos);
         ViewType view = newView(ctx, viewGroup, pos);
         return new ViewHolder<ViewType>(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder<ViewType> viewHolder, final int pos) {
-        Logger.d("debug pos1 + " + pos);
         viewHolder.setListener(new ViewHolder.IItemViewClickListener() {
 
             @Override

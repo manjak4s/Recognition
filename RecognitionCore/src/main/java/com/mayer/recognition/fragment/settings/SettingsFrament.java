@@ -13,9 +13,13 @@ import org.androidannotations.annotations.EFragment;
 @EFragment
 public class SettingsFrament extends PreferenceFragment {
 
+    public static String PREF_NAME = "SharedPreferences";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Using your MyPrefs values
+        this.getPreferenceManager().setSharedPreferencesName(PREF_NAME);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);

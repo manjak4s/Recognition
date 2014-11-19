@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.mayer.recognition.componenet.drawer.SmartDrawer_
             android:id="@+id/navigation_drawer"
             android:layout_width="240dp"
             android:layout_height="match_parent"
