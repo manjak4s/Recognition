@@ -3,6 +3,7 @@ package com.mayer.recognition.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import com.mayer.recognition.R;
 import com.mayer.recognition.componenet.drawer.DrawerView;
 import com.mayer.recognition.componenet.drawer.DrawerView_;
 import com.mayer.recognition.model.ui.TabViewModel;
@@ -24,7 +25,9 @@ public class DrawerManuAdapter extends MenuAdapter<TabViewModel, DrawerView> {
     }
 
     @Override
-    protected void bind(TabViewModel value, DrawerView view) {
+    protected void bind(TabViewModel value, DrawerView view, boolean isChecked) {
+
+        view.container.getBackground().setLevel(isChecked ? 1 : 0);
         view.name.setText(value.getTitle());
     }
 }

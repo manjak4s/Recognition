@@ -20,6 +20,8 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
     private List<ViewModel> list = new ArrayList<ViewModel>();
     private Context ctx;
 
+    private int selectedItem;
+
     private AdapterView.OnItemClickListener listener;
 
     public MenuAdapter(Context ctx) {
@@ -32,18 +34,23 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
         return this;
     }
 
-    public void setList(List<ViewModel> list) {
+    public void setList(List<ViewModel> list, int selectedItem) {
         this.list.clear();
         this.list.addAll(list);
+        this.selectedItem = selectedItem;
+        notifyDataSetChanged();
+    }
 
+    public void setSelectedItem(int selectedItem) {
+        this.selectedItem = selectedItem;
         notifyDataSetChanged();
     }
 
     /*
-     * Inserting a new item at the head of the list. This uses a specialized
-     * RecyclerView method, notifyItemInserted(), to trigger any enabled item
-     * animations in addition to updating the view.
-     */
+         * Inserting a new item at the head of the list. This uses a specialized
+         * RecyclerView method, notifyItemInserted(), to trigger any enabled item
+         * animations in addition to updating the view.
+         */
     public void addItem(ViewModel item) {
         list.add(0, item);
         notifyItemInserted(0);
@@ -72,6 +79,12 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
         return list;
     }
 
+    public int getSelectedItem() {
+        return selectedItem;
+    }
+
+
+
     @Override
     public ViewHolder<ViewType> onCreateViewHolder(ViewGroup viewGroup, final int pos) {
         ViewType view = newView(ctx, viewGroup, pos);
@@ -85,6 +98,10 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
             @Override
             public void onClick(final View caller) {
                 if (listener != null) {
+                    int oldSelectedItem = selectedItem;
+                    selectedItem = viewHolder.getPosition();
+                    notifyItemChanged(oldSelectedItem);
+                    notifyItemChanged(selectedItem);
                     listener.onItemClick(null, viewHolder.itemView, viewHolder.getPosition(), viewHolder.getItemId());
                 }
             }
@@ -95,7 +112,7 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
                 }
             }
         });
-        bind(list.get(pos), viewHolder.view);
+        bind(list.get(pos), viewHolder.view, selectedItem == pos);
     }
 
     @Override
@@ -105,7 +122,7 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
 
     protected abstract ViewType newView(Context ctx, ViewGroup viewGroup, int pos);
 
-    protected abstract void bind(ViewModel value, ViewType view);
+    protected abstract void bind(ViewModel value, ViewType view, boolean isChecked);
 
     public static class ViewHolder<ViewType extends View> extends RecyclerView.ViewHolder {
 
@@ -120,7 +137,8 @@ public abstract class MenuAdapter<ViewModel, ViewType extends View> extends Recy
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    view.requestFocus();
+//                    view.requestFocus();
+
                     listener.onClick(v);
                 }
             });

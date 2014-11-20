@@ -45,13 +45,14 @@ public class SmartDrawerRecyclerView extends RecyclerView {
     }
 
     public void navigateTo(int position) {
-        lastSelection = position;
-        View view = getChildAt(position);
-        Logger.d("hello position " + position);
-        if (view != null && !view.isFocused()) {
-            Logger.d("hello position done");
-            view.requestFocus();
-        }
+//        getLayoutManager().scrollToPosition();
+//        lastSelection = position;
+//        View view = getChildAt(position);
+//        Logger.d("hello position " + position);
+//        if (view != null && !view.isFocused()) {
+//            Logger.d("hello position done");
+//            view.requestFocus();
+//        }
     }
 
     @Override

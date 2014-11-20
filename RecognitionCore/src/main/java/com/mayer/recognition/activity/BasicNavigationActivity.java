@@ -75,34 +75,18 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
         pager.setAdapter(fragmentAdapter);
         pager.setOnPageChangeListener(this);
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
-
-            private DRAWER_STATE toggleMode;
-
-            public void onDrawerStateChanged(int newState) {
-                if (newState == DrawerLayout.STATE_SETTLING || newState == DrawerLayout.STATE_DRAGGING) {
-                    toggleMode = drawerLayout.isDrawerOpen(Gravity.LEFT) ? DRAWER_STATE.CLOSING : DRAWER_STATE.OPENING;
-                } else if (newState == DrawerLayout.STATE_IDLE) {
-                    toggleMode = toggleMode == DRAWER_STATE.OPENING ? DRAWER_STATE.OPENED : DRAWER_STATE.CLOSED;
-                }
-                if (toggleMode == DRAWER_STATE.OPENED || toggleMode == DRAWER_STATE.OPENING) {
-                    navigationDrawer.navigateTo(drawerPisition);
-                }
-            }
-        };
-
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         toggle.setDrawerIndicatorEnabled(true);
+
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         drawerAdapter = new DrawerManuAdapter(this);
 
         drawerAdapter.setOnListItemClickListener(this);
-        drawerAdapter.setList(TabsPagerAdapter.getTabs());
+        drawerAdapter.setList(TabsPagerAdapter.getTabs(), drawerPisition);
 
         navigationDrawer.setAdapter(drawerAdapter);
-        Logger.d("sup " + drawerPisition);
-        navigationDrawer.navigateTo(drawerPisition);
     }
 
     @Override
@@ -126,9 +110,8 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
 
     @Override
     public void onPageSelected(int position) {
-        Logger.d("onPageSelected " + position);
         drawerPisition = position;
-        navigationDrawer.navigateTo(drawerPisition);
+        drawerAdapter.setSelectedItem(drawerPisition);
     }
 
     @Override
@@ -141,4 +124,5 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
         drawerPisition = position;
         pager.setCurrentItem(drawerPisition);
     }
+
 }

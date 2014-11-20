@@ -2,6 +2,7 @@ package com.mayer.recognition.componenet.drawer;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,9 @@ public class DrawerView extends LinearLayout {
 
     @ViewById
     public TextView name;
+
+    @ViewById(R.id.drawer_item_container_id)
+    public LinearLayout container;
 
     public DrawerView(Context context) {
         super(context);
