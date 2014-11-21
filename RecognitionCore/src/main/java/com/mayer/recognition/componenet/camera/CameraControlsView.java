@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.ToggleButton;
 
 import com.mayer.recognition.R;
@@ -20,10 +21,13 @@ import org.androidannotations.annotations.ViewById;
 public class CameraControlsView extends GridLayout {
 
     @ViewById(R.id.flashIco)
-    protected ToggleButton flash;
+    public ToggleButton flash;
 
     @ViewById(R.id.rotateIco)
-    protected ToggleButton rotate;
+    public ToggleButton rotate;
+
+    @ViewById(R.id.zoom)
+    public SeekBar zoom;
 
     public CameraControlsView(Context context) {
         super(context);

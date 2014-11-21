@@ -9,17 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="60dp"
-        android:src="@drawable/ic_launcher"/>
 
-    <com.mayer.recognition.componenet.VerticalSeekBar
+    <com.mayer.recognition.componenet.camera.CameraControlsView_
         android:layout_gravity="right|center_vertical"
-        android:id="@+id/zoom"
-        android:progressDrawable="@drawable/progress"
+        android:id="@+id/controls"
         android:thumb="@drawable/thumb"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>

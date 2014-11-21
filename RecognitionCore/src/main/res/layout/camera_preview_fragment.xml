@@ -10,53 +10,11 @@
         android:layout_height="match_parent" />
 
 
-
-    <RelativeLayout
+    <com.mayer.recognition.componenet.camera.CameraControlsView_
         android:layout_gravity="bottom|center_horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="130dp">
-
-        <ImageView
-            android:background="@android:drawable/screen_background_dark"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:alpha="0.3" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-
-        <com.mayer.recognition.componenet.camera.CameraControlsView_
-            android:layout_alignParentLeft="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/controls"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:id="@+id/take_picture"
-            android:background="@null"
-            android:src="@drawable/take_a_photo" />
-
-        <com.mayer.recognition.componenet.VerticalSeekBar
-            android:paddingLeft="20dp"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp"
-            android:id="@+id/zoom"
-            android:progressDrawable="@drawable/progress"
-            android:thumb="@drawable/thumb"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="130dp"
+        android:id="@+id/controls" />
 
 
 </FrameLayout>

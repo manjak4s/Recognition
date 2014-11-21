@@ -38,6 +38,7 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.commonsware.cwac.camera.PictureTransaction;
 import com.mayer.recognition.R;
 import com.mayer.recognition.componenet.VerticalSeekBar;
+import com.mayer.recognition.componenet.camera.CameraControlsView;
 import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
@@ -79,8 +80,8 @@ public class PreviewCameraFragment extends CameraFragment {
     @OptionsMenuItem(R.id.show_zoom)
     protected MenuItem showZoom;
 
-    @ViewById(R.id.zoom)
-    protected SeekBar zoom;
+    @ViewById(R.id.controls)
+    protected CameraControlsView controls;
 
     @ViewById(R.id.camera)
     protected CameraView camera;
@@ -105,7 +106,7 @@ public class PreviewCameraFragment extends CameraFragment {
     protected void init() {
         setCameraView(camera);
         setRecordingItemVisibility();
-        zoom.setKeepScreenOn(true);
+        controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
     }
 
@@ -173,7 +174,7 @@ public class PreviewCameraFragment extends CameraFragment {
     @OptionsItem(R.id.show_zoom)
     protected void actionShowZoom() {
         showZoom.setChecked(!showZoom.isChecked());
-        zoom.setVisibility(showZoom.isChecked() ? View.VISIBLE : View.GONE);
+        controls.zoom.setVisibility(showZoom.isChecked() ? View.VISIBLE : View.GONE);
     }
 
     @OptionsItem(R.id.flash)
@@ -208,7 +209,7 @@ public class PreviewCameraFragment extends CameraFragment {
 
 
     void setRecordingItemVisibility() {
-        if (zoom != null && recordItem != null) {
+        if (controls.zoom != null && recordItem != null) {
             if (getDisplayOrientation() != 0 && getDisplayOrientation() != 180) {
                 recordItem.setVisible(false);
             }
@@ -237,11 +238,11 @@ public class PreviewCameraFragment extends CameraFragment {
 
     protected void zoom() {
         if (zoomLevel > 0) {
-            if (zoom instanceof VerticalSeekBar) {
-                ((VerticalSeekBar) zoom).setProgressAndThumb(zoomLevel);
+            if (controls.zoom instanceof VerticalSeekBar) {
+                ((VerticalSeekBar) controls.zoom).setProgressAndThumb(zoomLevel);
             } else {
-                zoom.setProgress(zoomLevel);
-                onProgressChangeOnSeekBar(zoom, zoomLevel, true);
+                controls.zoom.setProgress(zoomLevel);
+                onProgressChangeOnSeekBar(controls.zoom, zoomLevel, true);
             }
         }
     }
@@ -325,11 +326,11 @@ public class PreviewCameraFragment extends CameraFragment {
                             Camera.Parameters.FLASH_MODE_ON);
 
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
-                zoom.setMax(parameters.getMaxZoom());
-                zoom.setEnabled(true);
+                controls.zoom.setMax(parameters.getMaxZoom());
+                controls.zoom.setEnabled(true);
 
             } else {
-                zoom.setEnabled(false);
+                controls.zoom.setEnabled(false);
             }
             Parameters params = super.adjustPreviewParameters(parameters);
             return params;

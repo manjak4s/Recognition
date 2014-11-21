@@ -20,13 +20,11 @@ public class DrawerManuAdapter extends MenuAdapter<TabViewModel, DrawerView> {
 
     @Override
     protected DrawerView newView(Context ctx, ViewGroup viewGroup, int pos) {
-        Logger.d("hello " + pos);
         return DrawerView_.build(ctx);
     }
 
     @Override
     protected void bind(TabViewModel value, DrawerView view, boolean isChecked) {
-
         view.container.getBackground().setLevel(isChecked ? 1 : 0);
         view.name.setText(value.getTitle());
     }
