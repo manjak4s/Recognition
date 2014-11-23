@@ -39,9 +39,12 @@ import com.commonsware.cwac.camera.PictureTransaction;
 import com.mayer.recognition.R;
 import com.mayer.recognition.componenet.VerticalSeekBar;
 import com.mayer.recognition.componenet.camera.CameraControlsView;
+import com.mayer.recognition.componenet.camera.FlashButton;
+import com.mayer.recognition.util.CameraUtil;
 import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OptionsItem;
@@ -65,9 +68,6 @@ public class PreviewCameraFragment extends CameraFragment {
     @OptionsMenuItem(R.id.camera)
     protected MenuItem takePictureItem;
 
-    @OptionsMenuItem(R.id.flash)
-    protected MenuItem flashItem;
-
     @OptionsMenuItem(R.id.record)
     protected MenuItem recordItem;
 
@@ -87,11 +87,13 @@ public class PreviewCameraFragment extends CameraFragment {
     protected CameraView camera;
 
     protected boolean singleShotProcessing = false;
-    protected String flashMode = null;
+    protected CameraHost hostInstance;
 
     @InstanceState
     protected int zoomLevel;
 
+    @InstanceState
+    protected String flashLevel = Parameters.FLASH_MODE_AUTO;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,7 +101,10 @@ public class PreviewCameraFragment extends CameraFragment {
     }
 
     public CameraHost getHost() {
-        return new SimpleCameraHost.Builder(new MayerCameraHost(getActivity())).useFullBleedPreview(true).build();
+        if (hostInstance == null) {
+            hostInstance = new SimpleCameraHost.Builder(new MayerCameraHost(getActivity())).useFullBleedPreview(true).build();
+        }
+        return hostInstance;
     }
 
     @AfterViews
@@ -108,6 +113,23 @@ public class PreviewCameraFragment extends CameraFragment {
         setRecordingItemVisibility();
         controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
+        controls.flash.setFlashListener(new FlashButton.FlashListener() {
+            @Override
+            public void onAutomatic() {
+                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_AUTO);
+            }
+
+            @Override
+            public void onOn() {
+                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_TORCH);
+            }
+
+            @Override
+            public void onOff() {
+                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_OFF);
+            }
+        });
+        camera.setFlashMode(flashLevel);
     }
 
     @Override
@@ -177,10 +199,6 @@ public class PreviewCameraFragment extends CameraFragment {
         controls.zoom.setVisibility(showZoom.isChecked() ? View.VISIBLE : View.GONE);
     }
 
-    @OptionsItem(R.id.flash)
-    protected void actionFlash() {
-        flashItem.setChecked(!flashItem.isChecked());
-    }
 
     @OptionsItem(R.id.mirror_ffc)
     protected void actionMirrorFfc() {
@@ -228,9 +246,7 @@ public class PreviewCameraFragment extends CameraFragment {
 
         PictureTransaction xact = new PictureTransaction(getHost());
 
-        if (flashItem != null && flashItem.isChecked()) {
-            xact.flashMode(flashMode);
-        }
+            xact.flashMode(flashLevel);
 
         takePicture(xact);
     }
@@ -320,10 +336,12 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public Parameters adjustPreviewParameters(Parameters parameters) {
-            flashMode = CameraUtils.findBestFlashModeMatch(parameters,
-                            Camera.Parameters.FLASH_MODE_RED_EYE,
-                            Camera.Parameters.FLASH_MODE_AUTO,
-                            Camera.Parameters.FLASH_MODE_ON);
+            if (flashLevel == null) {
+                flashLevel = CameraUtils.findBestFlashModeMatch(parameters,
+                        Parameters.FLASH_MODE_TORCH,
+                        Parameters.FLASH_MODE_AUTO,
+                        Parameters.FLASH_MODE_ON);
+            }
 
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 controls.zoom.setMax(parameters.getMaxZoom());

@@ -34,14 +34,12 @@
             android:focusable="false"
             android:focusableInTouchMode="false" />
 
-        <ToggleButton
+        <com.mayer.recognition.componenet.camera.FlashButton_
             android:id="@+id/flashIco"
             android:layout_width="@dimen/toggle_bg_size"
             android:layout_height="@dimen/toggle_bg_size"
-            android:background="@drawable/flash"
-            android:textOn=""
-            android:textOff=""
             android:focusable="false"
+            android:background="@null"
             android:focusableInTouchMode="false" />
 
 

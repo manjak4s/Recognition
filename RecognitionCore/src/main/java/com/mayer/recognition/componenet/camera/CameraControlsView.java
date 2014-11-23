@@ -21,7 +21,7 @@ import org.androidannotations.annotations.ViewById;
 public class CameraControlsView extends GridLayout {
 
     @ViewById(R.id.flashIco)
-    public ToggleButton flash;
+    public FlashButton flash;
 
     @ViewById(R.id.rotateIco)
     public ToggleButton rotate;
