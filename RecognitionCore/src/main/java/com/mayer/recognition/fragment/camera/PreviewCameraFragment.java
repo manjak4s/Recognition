@@ -93,7 +93,7 @@ public class PreviewCameraFragment extends CameraFragment {
     protected int zoomLevel;
 
     @InstanceState
-    protected String flashLevel = Parameters.FLASH_MODE_AUTO;
+    protected String flashLevel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,23 +113,7 @@ public class PreviewCameraFragment extends CameraFragment {
         setRecordingItemVisibility();
         controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
-        controls.flash.setFlashListener(new FlashButton.FlashListener() {
-            @Override
-            public void onAutomatic() {
-                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_AUTO);
-            }
 
-            @Override
-            public void onOn() {
-                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_TORCH);
-            }
-
-            @Override
-            public void onOff() {
-                camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_OFF);
-            }
-        });
-        camera.setFlashMode(flashLevel);
     }
 
     @Override
@@ -340,8 +324,27 @@ public class PreviewCameraFragment extends CameraFragment {
                 flashLevel = CameraUtils.findBestFlashModeMatch(parameters,
                         Parameters.FLASH_MODE_TORCH,
                         Parameters.FLASH_MODE_AUTO,
-                        Parameters.FLASH_MODE_ON);
+                        Parameters.FLASH_MODE_OFF);
             }
+            controls.flash.setStates(camera.getCamera().getParameters().getSupportedFlashModes());
+
+            controls.flash.setFlashListener(new FlashButton.FlashListener() {
+                @Override
+                public void onAutomatic() {
+                    camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_AUTO);
+                }
+
+                @Override
+                public void onOn() {
+                    camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_TORCH);
+                }
+
+                @Override
+                public void onOff() {
+                    camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_OFF);
+                }
+            });
+            camera.setFlashMode(flashLevel);
 
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 controls.zoom.setMax(parameters.getMaxZoom());

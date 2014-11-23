@@ -1,13 +1,20 @@
 package com.mayer.recognition.componenet.camera;
 
 import android.content.Context;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.mayer.recognition.R;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by dot on 23.11.2014.
@@ -15,68 +22,89 @@ import org.androidannotations.annotations.EView;
 @EView
 public class FlashButton extends ImageButton implements View.OnClickListener {
 
-    @Override
-    public void onClick(View v) {
-        int next = ((mState.ordinal() + 1) % FlashEnum.values().length);
-        setState(FlashEnum.values()[next]);
-        performFlashClick();
+    protected List<String>  states = new ArrayList<String>();
+    protected static final List<String> statesSupported = new ArrayList<String>();
+
+    static {
+        statesSupported.add(Parameters.FLASH_MODE_AUTO);
+        statesSupported.add(Parameters.FLASH_MODE_TORCH);
+        statesSupported.add(Parameters.FLASH_MODE_OFF);
     }
 
-    public enum FlashEnum {
-        AUTOMATIC, ON, OFF
+    private String mState;
+    private FlashListener mFlashListener;
+
+    @Override
+    public void onClick(View v) {
+        if (states == null || states.size() == 0) {
+            return;
+        }
+        int statePosition = ((states.indexOf(mState) + 1) % states.size());
+        setState(states.get(statePosition));
+        performFlashClick();
     }
 
     public interface FlashListener {
         void onAutomatic();
+
         void onOn();
+
         void onOff();
     }
 
-    private FlashEnum mState;
-    private FlashListener mFlashListener;
+
 
     public FlashButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOnClickListener(this);
-        setState(FlashEnum.AUTOMATIC);
+        setStates(statesSupported);
+        setState(Camera.Parameters.FLASH_MODE_AUTO);
     }
 
     private void performFlashClick() {
-        if(mFlashListener == null)return;
-        switch (mState) {
-            case AUTOMATIC:
-                mFlashListener.onAutomatic();
-                break;
-            case ON:
-                mFlashListener.onOn();
-                break;
-            case OFF:
-                mFlashListener.onOff();
-                break;
+        if (mFlashListener == null) {
+            return;
+        }
+        if (Camera.Parameters.FLASH_MODE_AUTO.equals(mState)) {
+            mFlashListener.onAutomatic();
+        } else if (Camera.Parameters.FLASH_MODE_TORCH.equals(mState)) {
+            mFlashListener.onOn();
+        } else if (Camera.Parameters.FLASH_MODE_OFF.equals(mState)) {
+            mFlashListener.onOff();
         }
     }
 
     private void createDrawableState() {
-        switch (mState) {
-            case AUTOMATIC:
-                setImageResource(R.drawable.ic_flash_on);
-                break;
-            case ON:
-                setImageResource(R.drawable.ic_flash);
-                break;
-            case OFF:
-                setImageResource(R.drawable.ic_flash_disabled);
-                break;
+        if (Camera.Parameters.FLASH_MODE_AUTO.equals(mState)) {
+            setImageResource(R.drawable.ic_flash_on);
+        } else if (Camera.Parameters.FLASH_MODE_TORCH.equals(mState)) {
+            setImageResource(R.drawable.ic_flash);
+        } else if (Camera.Parameters.FLASH_MODE_OFF.equals(mState)) {
+            setImageResource(R.drawable.ic_flash_disabled);
         }
     }
 
 
-    public FlashEnum getState() {
-        return mState;
+    public void setStates(List<String> states) {
+        this.states.clear();
+        if (states == null || states.size() == 0) {
+            setVisibility(GONE);
+            return;
+        } else {
+            setVisibility(VISIBLE);
+        }
+        for (String mode : states) {
+            if (statesSupported.contains(mode)) {
+                this.states.add(mode);
+            }
+        }
     }
 
-    public void setState(FlashEnum state) {
-        if(state == null)return;
+    public void setState(String state) {
+        if (state == null) {
+            setVisibility(GONE);
+            return;
+        }
         this.mState = state;
         createDrawableState();
 
@@ -89,5 +117,4 @@ public class FlashButton extends ImageButton implements View.OnClickListener {
     public void setFlashListener(FlashListener flashListener) {
         this.mFlashListener = flashListener;
     }
-
 }

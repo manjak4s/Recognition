@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/CwacCamera" />
             <option value="$PROJECT_DIR$/RecognitionCore" />
             <option value="$PROJECT_DIR$/RecognitionEngine" />
           </set>
