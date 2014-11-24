@@ -39,6 +39,7 @@ import com.commonsware.cwac.camera.PictureTransaction;
 import com.mayer.recognition.R;
 import com.mayer.recognition.componenet.VerticalSeekBar;
 import com.mayer.recognition.componenet.camera.CameraControlsView;
+import com.mayer.recognition.componenet.camera.FfcRfcCameraButton;
 import com.mayer.recognition.componenet.camera.FlashButton;
 import com.mayer.recognition.util.CameraUtil;
 import com.mayer.recognition.util.Logger;
@@ -87,10 +88,14 @@ public class PreviewCameraFragment extends CameraFragment {
     protected CameraView camera;
 
     protected boolean singleShotProcessing = false;
+
     protected CameraHost hostInstance;
 
     @InstanceState
     protected int zoomLevel;
+
+    @InstanceState
+    protected int cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     @InstanceState
     protected String flashLevel;
@@ -260,12 +265,8 @@ public class PreviewCameraFragment extends CameraFragment {
         }
 
         @Override
-        public boolean useFrontFacingCamera() {
-            if (getArguments() == null) {
-                return (false);
-            }
-
-            return (getArguments().getBoolean(KEY_USE_FFC));
+        public int getCameraId() {
+            return cameraId;
         }
 
         @Override
@@ -344,7 +345,24 @@ public class PreviewCameraFragment extends CameraFragment {
                     camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_OFF);
                 }
             });
-            camera.setFlashMode(flashLevel);
+
+            controls.rotate.setFlashListener(new FfcRfcCameraButton.CameraFacingListener() {
+                @Override
+                public void onFFC() {
+                    cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+                    camera.resetCamera();
+                }
+
+                @Override
+                public void onRFC() {
+                    cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+                    camera.resetCamera();
+
+                }
+            });
+            if (cameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                camera.setFlashMode(flashLevel);
+            }
 
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 controls.zoom.setMax(parameters.getMaxZoom());
@@ -369,4 +387,5 @@ public class PreviewCameraFragment extends CameraFragment {
             return mirrorFFC.isChecked();
         }
     }
+
 }

@@ -50,9 +50,8 @@
 
     <!-- quick check on sdk.dir -->
     <fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
-            unless="sdk.dir"
-    />
+        message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
+        unless="sdk.dir" />
 
     <!--
         Import per project custom build rules if present at the root of the project.
@@ -89,25 +88,20 @@
     <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
-<target name="doc"> 
-    <javadoc packagenames="com.commonsware.cwac.*"
-        sourcepath="src" 
-        destdir="javadoc" 
-        author="false" 
-        version="false"
-        windowtitle="CWAC-Camera JavaDocs"> 
-    </javadoc> 
-</target>
+    <target name="doc">
+        <javadoc packagenames="com.commonsware.cwac.*" sourcepath="src" destdir="javadoc"
+            author="false" version="false" windowtitle="CWAC-Camera JavaDocs"></javadoc>
+    </target>
 
-	<target name="jar" depends="release">
-		<delete file="bin/CWAC-Camera.jar" />
-    <jar destfile="bin/CWAC-Camera.jar">
-      <fileset dir="bin/classes">
-        <exclude name="**/BuildConfig.class" />
-        <exclude name="**/R.class" />
-        <exclude name="**/R$*.class" />
-      </fileset>
-    </jar>
-	</target>
+    <target name="jar" depends="release">
+        <delete file="bin/CWAC-Camera.jar" />
+        <jar destfile="bin/CWAC-Camera.jar">
+            <fileset dir="bin/classes">
+                <exclude name="**/BuildConfig.class" />
+                <exclude name="**/R.class" />
+                <exclude name="**/R$*.class" />
+            </fileset>
+        </jar>
+    </target>
 
 </project>

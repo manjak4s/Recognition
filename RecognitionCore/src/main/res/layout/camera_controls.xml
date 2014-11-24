@@ -24,7 +24,7 @@
         android:layout_height="match_parent">
 
 
-        <ToggleButton
+        <com.mayer.recognition.componenet.camera.FfcRfcCameraButton_
             android:id="@+id/rotateIco"
             android:layout_width="@dimen/toggle_bg_size"
             android:layout_height="@dimen/toggle_bg_size"

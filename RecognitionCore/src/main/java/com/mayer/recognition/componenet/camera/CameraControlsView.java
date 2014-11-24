@@ -24,7 +24,7 @@ public class CameraControlsView extends GridLayout {
     public FlashButton flash;
 
     @ViewById(R.id.rotateIco)
-    public ToggleButton rotate;
+    public FfcRfcCameraButton rotate;
 
     @ViewById(R.id.zoom)
     public SeekBar zoom;

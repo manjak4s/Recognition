@@ -72,10 +72,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         if (context instanceof CameraHostProvider) {
             setHost(((CameraHostProvider) context).getCameraHost());
         } else {
-            throw new IllegalArgumentException("To use the two- or "
-                    + "three-parameter constructors on CameraView, "
-                    + "your activity needs to implement the "
-                    + "CameraHostProvider interface");
+            throw new IllegalArgumentException("To use the two- or  three-parameter constructors on CameraView, your activity needs to implement the CameraHostProvider interface");
         }
     }
 
@@ -100,28 +97,32 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         addView(previewStrategy.getWidget());
 
         if (camera == null) {
-            cameraId = getHost().getCameraId();
+            createCamera();
+        }
+    }
 
-            if (cameraId >= 0) {
-                try {
-                    camera = Camera.open(cameraId);
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void createCamera() {
+        cameraId = getHost().getCameraId();
 
-                    if (getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
-                        onOrientationChange.enable();
-                    }
+        if (cameraId >= 0) {
+            try {
+                camera = Camera.open(cameraId);
 
-                    setCameraDisplayOrientation();
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
-                            && getHost() instanceof Camera.FaceDetectionListener) {
-                        camera.setFaceDetectionListener((Camera.FaceDetectionListener) getHost());
-                    }
-                } catch (Exception e) {
-                    getHost().onCameraFail(FailureReason.UNKNOWN);
+                if (getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+                    onOrientationChange.enable();
                 }
-            } else {
-                getHost().onCameraFail(FailureReason.NO_CAMERAS_REPORTED);
+
+                setCameraDisplayOrientation();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && getHost() instanceof Camera.FaceDetectionListener) {
+                    camera.setFaceDetectionListener((Camera.FaceDetectionListener) getHost());
+                }
+            } catch (Exception e) {
+                getHost().onCameraFail(FailureReason.UNKNOWN);
             }
+        } else {
+            getHost().onCameraFail(FailureReason.NO_CAMERAS_REPORTED);
         }
     }
 
@@ -139,14 +140,16 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         lastPictureOrientation = -1;
     }
 
-    // based on CameraPreview.java from ApiDemos
+    public void resetCamera() {
+        onPause();
+        addView(previewStrategy.getWidget());
+        createCamera();
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final int width =
-                resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-        final int height =
-                resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        final int width = resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
         setMeasuredDimension(width, height);
 
         if (width > 0 && height > 0) {
@@ -155,46 +158,21 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
                 try {
                     if (getHost().getRecordingHint() != CameraHost.RecordingHint.STILL_ONLY) {
-                        // Camera.Size deviceHint=
-                        // host.getDeviceProfile()
-                        // .getPreferredPreviewSizeForVideo(getDisplayOrientation(),
-                        // width,
-                        // height,
-                        // camera.getParameters());
-
-                        newSize =
-                                getHost().getPreferredPreviewSizeForVideo(getDisplayOrientation(),
-                                        width,
-                                        height,
-                                        camera.getParameters(),
-                                        null);
-
-                        // if (newSize != null) {
-                        // android.util.Log.wtf("CameraView",
-                        // String.format("getPreferredPreviewSizeForVideo: %d x %d",
-                        // newSize.width,
-                        // newSize.height));
-                        // }
+                        newSize = getHost().getPreferredPreviewSizeForVideo(getDisplayOrientation(), width, height, camera.getParameters(), null);
                     }
 
                     if (newSize == null || newSize.width * newSize.height < 65536) {
-                        newSize =
-                                getHost().getPreviewSize(getDisplayOrientation(),
-                                        width, height,
-                                        camera.getParameters());
+                        newSize = getHost().getPreviewSize(getDisplayOrientation(), width, height, camera.getParameters());
                     }
                 } catch (Exception e) {
-                    android.util.Log.e(getClass().getSimpleName(),
-                            "Could not work with camera parameters?",
-                            e);
+                    android.util.Log.e(getClass().getSimpleName(), "Could not work with camera parameters?", e);
                     // TODO get this out to library clients
                 }
 
                 if (newSize != null) {
                     if (previewSize == null) {
                         previewSize = newSize;
-                    } else if (previewSize.width != newSize.width
-                            || previewSize.height != newSize.height) {
+                    } else if (previewSize.width != newSize.width || previewSize.height != newSize.height) {
                         if (inPreview) {
                             stopPreview();
                         }
@@ -221,8 +199,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
             // handle orientation
 
             if (previewSize != null) {
-                if (getDisplayOrientation() == 90
-                        || getDisplayOrientation() == 270) {
+                if (getDisplayOrientation() == 90 || getDisplayOrientation() == 270) {
                     previewWidth = previewSize.height;
                     previewHeight = previewSize.width;
                 } else {
@@ -235,17 +212,12 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
                     (width * previewHeight > height * previewWidth);
             boolean useFullBleed = getHost().useFullBleedPreview();
 
-            if ((useFirstStrategy && !useFullBleed)
-                    || (!useFirstStrategy && useFullBleed)) {
-                final int scaledChildWidth =
-                        previewWidth * height / previewHeight;
-                child.layout((width - scaledChildWidth) / 2, 0,
-                        (width + scaledChildWidth) / 2, height);
+            if ((useFirstStrategy && !useFullBleed) || (!useFirstStrategy && useFullBleed)) {
+                final int scaledChildWidth = previewWidth * height / previewHeight;
+                child.layout((width - scaledChildWidth) / 2, 0, (width + scaledChildWidth) / 2, height);
             } else {
-                final int scaledChildHeight =
-                        previewHeight * width / previewWidth;
-                child.layout(0, (height - scaledChildHeight) / 2, width,
-                        (height + scaledChildHeight) / 2);
+                final int scaledChildHeight = previewHeight * width / previewWidth;
+                child.layout(0, (height - scaledChildHeight) / 2, width, (height + scaledChildHeight) / 2);
             }
         }
     }
@@ -273,24 +245,20 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
     public void takePicture(boolean needBitmap, boolean needByteArray) {
         PictureTransaction xact = new PictureTransaction(getHost());
 
-        takePicture(xact.needBitmap(needBitmap)
-                .needByteArray(needByteArray));
+        takePicture(xact.needBitmap(needBitmap).needByteArray(needByteArray));
     }
 
     public void takePicture(final PictureTransaction xact) {
         if (inPreview) {
             if (isAutoFocusing) {
-                throw new IllegalStateException(
-                        "Camera cannot take a picture while auto-focusing");
+                throw new IllegalStateException("Camera cannot take a picture while auto-focusing");
             } else {
                 previewParams = camera.getParameters();
 
                 Camera.Parameters pictureParams = camera.getParameters();
-                Camera.Size pictureSize =
-                        xact.host.getPictureSize(xact, pictureParams);
+                Camera.Size pictureSize = xact.host.getPictureSize(xact, pictureParams);
 
-                pictureParams.setPictureSize(pictureSize.width,
-                        pictureSize.height);
+                pictureParams.setPictureSize(pictureSize.width, pictureSize.height);
                 pictureParams.setPictureFormat(ImageFormat.JPEG);
 
                 if (xact.flashMode != null) {
@@ -301,19 +269,16 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
                     setCameraPictureOrientation(pictureParams);
                 }
 
-                camera.setParameters(xact.host.adjustPictureParameters(xact,
-                        pictureParams));
+                camera.setParameters(xact.host.adjustPictureParameters(xact, pictureParams));
                 xact.cameraView = this;
 
                 postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            camera.takePicture(xact, null,
-                                    new PictureTransactionCallback(xact));
+                            camera.takePicture(xact, null, new PictureTransactionCallback(xact));
                         } catch (Exception e) {
-                            android.util.Log.e(getClass().getSimpleName(),
-                                    "Exception taking a picture", e);
+                            android.util.Log.e(getClass().getSimpleName(), "Exception taking a picture", e);
                             // TODO get this out to library clients
                         }
                     }
@@ -333,13 +298,11 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
     public void record() throws Exception {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            throw new UnsupportedOperationException(
-                    "Video recording supported only on API Level 11+");
+            throw new UnsupportedOperationException("Video recording supported only on API Level 11+");
         }
 
         if (displayOrientation != 0 && displayOrientation != 180) {
-            throw new UnsupportedOperationException(
-                    "Video recording supported only in landscape");
+            throw new UnsupportedOperationException("Video recording supported only in landscape");
         }
 
         Camera.Parameters pictureParams = camera.getParameters();
@@ -370,8 +333,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
     public void stopRecording() throws IOException {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            throw new UnsupportedOperationException(
-                    "Video recording supported only on API Level 11+");
+            throw new UnsupportedOperationException("Video recording supported only on API Level 11+");
         }
 
         MediaRecorder tempRecorder = recorder;
@@ -423,17 +385,14 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
     public ZoomTransaction zoomTo(int level) {
         if (camera == null) {
-            throw new IllegalStateException(
-                    "Yes, we have no camera, we have no camera today");
+            throw new IllegalStateException("Yes, we have no camera, we have no camera today");
         } else {
             Camera.Parameters params = camera.getParameters();
 
             if (level >= 0 && level <= params.getMaxZoom()) {
                 return (new ZoomTransaction(camera, level));
             } else {
-                throw new IllegalArgumentException(
-                        String.format("Invalid zoom level: %d",
-                                level));
+                throw new IllegalArgumentException(String.format("Invalid zoom level: %d", level));
             }
         }
     }
@@ -448,6 +407,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void stopFaceDetection() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
                 && camera != null && isDetectingFaces) {
@@ -537,9 +497,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
     private void setCameraDisplayOrientation() {
         Camera.CameraInfo info = new Camera.CameraInfo();
-        int rotation =
-                getActivity().getWindowManager().getDefaultDisplay()
-                        .getRotation();
+        int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         DisplayMetrics dm = new DisplayMetrics();
 
@@ -587,10 +545,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         Camera.getCameraInfo(cameraId, info);
 
         if (getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
-            outputOrientation =
-                    getCameraPictureRotation(getActivity().getWindowManager()
-                            .getDefaultDisplay()
-                            .getOrientation());
+            outputOrientation = getCameraPictureRotation(getActivity().getWindowManager().getDefaultDisplay().getOrientation());
         } else if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             outputOrientation = (360 - displayOrientation) % 360;
         } else {
@@ -676,8 +631,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         }
     }
 
-    private class PictureTransactionCallback implements
-            Camera.PictureCallback {
+    private class PictureTransactionCallback implements Camera.PictureCallback {
         PictureTransaction xact = null;
 
         PictureTransactionCallback(PictureTransaction xact) {

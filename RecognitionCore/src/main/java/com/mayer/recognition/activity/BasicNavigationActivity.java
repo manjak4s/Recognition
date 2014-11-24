@@ -63,10 +63,6 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
 
     protected TabsPagerAdapter fragmentAdapter;
 
-    private enum DRAWER_STATE {
-        CLOSED, OPENING, OPENED, CLOSING;
-    }
-
     @AfterViews
     protected void init() {
         setSupportActionBar(toolbar);

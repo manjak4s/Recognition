@@ -11,7 +11,7 @@ import android.os.Build;
 public class CameraUtil {
 
     public static boolean checkCameraHardware(Context context) {
-        Logger.d("Number of cameras : " + Camera.getNumberOfCameras());
+        Logger.d("Number of cameras : " + getCameraCount());
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
             // this device has a camera
             return true;
@@ -19,6 +19,10 @@ public class CameraUtil {
             // no camera on this device
             return false;
         }
+    }
+
+    public static int getCameraCount() {
+        return Camera.getNumberOfCameras();
     }
 
     /** A safe way to get an instance of the Camera object. */
