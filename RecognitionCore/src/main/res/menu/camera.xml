@@ -2,29 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/camera"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:showAsAction="ifRoom"
-        android:title="@string/take_picture">
-    </item>
-    <item
-        android:id="@+id/record"
-        android:showAsAction="ifRoom"
-        android:title="@string/record">
-    </item>
-    <item
-        android:id="@+id/stop"
-        android:showAsAction="ifRoom"
-        android:title="@string/stop"
-        android:visible="false">
-    </item>
-    <item
-        android:id="@+id/autofocus"
-        android:enabled="false"
-        android:showAsAction="never"
-        android:title="@string/auto_focus">
-    </item>
-    <item
         android:id="@+id/single_shot"
         android:checkable="true"
         android:checked="false"

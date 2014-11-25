@@ -20,6 +20,10 @@ import org.androidannotations.annotations.ViewById;
 @EViewGroup(R.layout.camera_controls)
 public class CameraControlsView extends GridLayout {
 
+    @ViewById(R.id.take_picture)
+    public ImageButton shoot;
+
+
     @ViewById(R.id.flashIco)
     public FlashButton flash;
 

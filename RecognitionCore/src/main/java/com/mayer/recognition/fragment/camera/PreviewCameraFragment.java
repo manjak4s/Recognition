@@ -63,18 +63,6 @@ public class PreviewCameraFragment extends CameraFragment {
     @OptionsMenuItem(R.id.single_shot)
     protected MenuItem singleShotItem ;
 
-    @OptionsMenuItem(R.id.autofocus)
-    protected MenuItem autoFocusItem;
-
-    @OptionsMenuItem(R.id.camera)
-    protected MenuItem takePictureItem;
-
-    @OptionsMenuItem(R.id.record)
-    protected MenuItem recordItem;
-
-    @OptionsMenuItem(R.id.stop)
-    protected MenuItem stopRecordItem;
-
     @OptionsMenuItem(R.id.mirror_ffc)
     protected MenuItem mirrorFFC;
 
@@ -115,7 +103,6 @@ public class PreviewCameraFragment extends CameraFragment {
     @AfterViews
     protected void init() {
         setCameraView(camera);
-        setRecordingItemVisibility();
         controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
 
@@ -136,43 +123,19 @@ public class PreviewCameraFragment extends CameraFragment {
         Logger.d("isRecording() is " + (isRecording()));
 
         if (isRecording()) {
-            recordItem.setVisible(false);
-            stopRecordItem.setVisible(true);
-            takePictureItem.setVisible(false);
+            controls.shoot.setVisibility(View.GONE);
         }
-        setRecordingItemVisibility();
     }
 
-    @OptionsItem(R.id.camera)
+    @Click(R.id.take_picture)
     protected void actionCamera() {
         takeSimplePicture();
     }
 
-    @OptionsItem(R.id.record)
-    protected void actionRecord() {
-        try {
-            record();
-            getActivity().invalidateOptionsMenu();
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), "Exception trying to record", e);
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @OptionsItem(R.id.stop)
-    protected void actionStop() {
-        try {
-            stopRecording();
-            getActivity().invalidateOptionsMenu();
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), "Exception trying to stop recording", e);
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @OptionsItem(R.id.autofocus)
+    @Click(R.id.camera)
     protected void actionAutoFocus() {
-        takePictureItem.setEnabled(false);
+        controls.shoot.setEnabled(false);
+        cancelAutoFocus();
         autoFocus();
     }
 
@@ -215,14 +178,6 @@ public class PreviewCameraFragment extends CameraFragment {
     } // ignore
 
 
-    void setRecordingItemVisibility() {
-        if (controls.zoom != null && recordItem != null) {
-            if (getDisplayOrientation() != 0 && getDisplayOrientation() != 180) {
-                recordItem.setVisible(false);
-            }
-        }
-    }
-
     protected Contract getContract() {
         return (Contract) getActivity();
     }
@@ -230,7 +185,7 @@ public class PreviewCameraFragment extends CameraFragment {
     public void takeSimplePicture() {
         if (singleShotItem != null && singleShotItem.isChecked()) {
             singleShotProcessing = true;
-            takePictureItem.setEnabled(false);
+            controls.shoot.setEnabled(false);
         }
 
         PictureTransaction xact = new PictureTransaction(getHost());
@@ -286,7 +241,7 @@ public class PreviewCameraFragment extends CameraFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        takePictureItem.setEnabled(true);
+                        controls.shoot.setEnabled(true);
                     }
                 });
 
@@ -299,18 +254,11 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public void autoFocusAvailable() {
-
-            if (autoFocusItem != null) {
-                autoFocusItem.setEnabled(true);
-            }
             zoom();
         }
 
         @Override
         public void autoFocusUnavailable() {
-            if (autoFocusItem != null) {
-                stopFaceDetection();
-            }
         }
 
         @Override
@@ -379,7 +327,7 @@ public class PreviewCameraFragment extends CameraFragment {
         @TargetApi(16)
         public void onAutoFocus(boolean success, Camera camera) {
             super.onAutoFocus(success, camera);
-            takePictureItem.setEnabled(true);
+            controls.shoot.setEnabled(true);
         }
 
         @Override
