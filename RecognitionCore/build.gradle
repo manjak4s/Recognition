@@ -21,8 +21,8 @@ repositories {
 }
 
 dependencies {
-    compile project(":CwacCamera")
     compile project(":RecognitionEngine")
+    compile project(":RecognitionCamera")
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -30,15 +30,11 @@ dependencies {
     compile "com.telly:groundy:${groundyVersion}"
     compile "org.androidannotations:androidannotations-api:${aaVersion}"
 
-    compile 'com.android.support:support-v4:21.0.0'
-    compile 'com.android.support:support-v13:21.0.0'
-
-    compile 'com.android.support:appcompat-v7:21.0.+'
-
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
-
-//    compile 'com.commonsware.cwac:camera:0.6.10'
+    compile "com.android.support:support-v4:${rootProject.ext.support4compat}"
+    compile "com.android.support:support-v13:${rootProject.ext.support4compat}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.support4compat}"
+    compile "com.android.support:cardview-v7:${rootProject.ext.support4compat}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.support4compat}"
 }
 
 aptlibs {
