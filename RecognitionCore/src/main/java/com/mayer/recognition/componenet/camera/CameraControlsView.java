@@ -10,6 +10,7 @@ import android.widget.SeekBar;
 import android.widget.ToggleButton;
 
 import com.mayer.recognition.R;
+import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -22,7 +23,6 @@ public class CameraControlsView extends GridLayout {
 
     @ViewById(R.id.take_picture)
     public ImageButton shoot;
-
 
     @ViewById(R.id.flashIco)
     public FlashButton flash;
@@ -43,5 +43,12 @@ public class CameraControlsView extends GridLayout {
 
     public CameraControlsView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public void setEnabled(boolean on) {
+        shoot.setEnabled(on);
+        zoom.setEnabled(on);
+        flash.setEnabled(on);
+        rotate.setEnabled(on);
     }
 }

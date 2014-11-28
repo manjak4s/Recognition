@@ -23,6 +23,7 @@ repositories {
 dependencies {
     compile project(":RecognitionEngine")
     compile project(":RecognitionCamera")
+    compile project(":MaterialDesign")
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 

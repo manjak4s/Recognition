@@ -25,9 +25,11 @@ import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.CameraInfo;
 import android.media.MediaRecorder;
 import android.os.Build;
+import android.test.UiThreadTest;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
@@ -56,7 +58,6 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
 
     public CameraView(Context context) {
         super(context);
-
         onOrientationChange = new OnOrientationChange(context.getApplicationContext());
     }
 
@@ -248,7 +249,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
         takePicture(xact.needBitmap(needBitmap).needByteArray(needByteArray));
     }
 
-    public void takePicture(final PictureTransaction xact) {
+    public void takePicture(final PictureTransaction xact) throws IllegalStateException {
         if (inPreview) {
             if (isAutoFocusing) {
                 throw new IllegalStateException("Camera cannot take a picture while auto-focusing");
@@ -272,23 +273,17 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
                 camera.setParameters(xact.host.adjustPictureParameters(xact, pictureParams));
                 xact.cameraView = this;
 
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            camera.takePicture(xact, null, new PictureTransactionCallback(xact));
-                        } catch (Exception e) {
-                            android.util.Log.e(getClass().getSimpleName(), "Exception taking a picture", e);
-                            // TODO get this out to library clients
-                        }
-                    }
-                }, xact.host.getDeviceProfile().getPictureDelay());
+                try {
+                    camera.takePicture(xact, null, new PictureTransactionCallback(xact));
+                } catch (Exception e) {
+                    android.util.Log.e(getClass().getSimpleName(), "Exception taking a picture", e);
+                    // TODO get this out to library clients
+                }
 
                 inPreview = false;
             }
         } else {
-            throw new IllegalStateException(
-                    "Preview mode must have started before you can take a picture");
+            throw new IllegalStateException("Preview mode must have started before you can take a picture");
         }
     }
 

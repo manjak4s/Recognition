@@ -1,3 +1,4 @@
+include ':MaterialDesign'
 include 'RecognitionCamera'
 include 'RecognitionEngine'
 include 'RecognitionCore'

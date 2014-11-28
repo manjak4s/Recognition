@@ -17,16 +17,15 @@ package com.mayer.recognition.fragment.camera;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.Camera;
-import android.hardware.Camera.Face;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -41,10 +40,10 @@ import com.mayer.recognition.componenet.VerticalSeekBar;
 import com.mayer.recognition.componenet.camera.CameraControlsView;
 import com.mayer.recognition.componenet.camera.FfcRfcCameraButton;
 import com.mayer.recognition.componenet.camera.FlashButton;
-import com.mayer.recognition.util.CameraUtil;
 import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.InstanceState;
@@ -52,16 +51,15 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.SeekBarProgressChange;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.camera_preview_fragment)
 @OptionsMenu(R.menu.camera)
 public class PreviewCameraFragment extends CameraFragment {
 
-    protected static final String KEY_USE_FFC = "com.commonsware.cwac.camera.demo.USE_FFC";
-
     @OptionsMenuItem(R.id.single_shot)
-    protected MenuItem singleShotItem ;
+    protected MenuItem singleShotItem;
 
     @OptionsMenuItem(R.id.mirror_ffc)
     protected MenuItem mirrorFFC;
@@ -74,6 +72,9 @@ public class PreviewCameraFragment extends CameraFragment {
 
     @ViewById(R.id.camera)
     protected CameraView camera;
+
+    @ViewById(R.id.progress)
+    protected FrameLayout progressFrame;
 
     protected boolean singleShotProcessing = false;
 
@@ -100,12 +101,23 @@ public class PreviewCameraFragment extends CameraFragment {
         return hostInstance;
     }
 
+    @UiThread
+    protected void setProgress(boolean on) {
+        controls.setEnabled(!on);
+        camera.setClickable(!on);
+        if (on) {
+            progressFrame.setVisibility(View.VISIBLE);
+        } else {
+            progressFrame.setVisibility(View.GONE);
+        }
+    }
+
     @AfterViews
     protected void init() {
+//        setProgress(true);
         setCameraView(camera);
         controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
-
     }
 
     @Override
@@ -120,7 +132,6 @@ public class PreviewCameraFragment extends CameraFragment {
             return;
         }
         singleShotItem.setChecked(getContract().isSingleShotMode());
-        Logger.d("isRecording() is " + (isRecording()));
 
         if (isRecording()) {
             controls.shoot.setVisibility(View.GONE);
@@ -129,6 +140,8 @@ public class PreviewCameraFragment extends CameraFragment {
 
     @Click(R.id.take_picture)
     protected void actionCamera() {
+        Logger.d("oncamera");
+
         takeSimplePicture();
     }
 
@@ -136,6 +149,7 @@ public class PreviewCameraFragment extends CameraFragment {
     protected void actionAutoFocus() {
         controls.shoot.setEnabled(false);
         cancelAutoFocus();
+        setProgress(true);
         autoFocus();
     }
 
@@ -150,7 +164,6 @@ public class PreviewCameraFragment extends CameraFragment {
         showZoom.setChecked(!showZoom.isChecked());
         controls.zoom.setVisibility(showZoom.isChecked() ? View.VISIBLE : View.GONE);
     }
-
 
     @OptionsItem(R.id.mirror_ffc)
     protected void actionMirrorFfc() {
@@ -173,11 +186,6 @@ public class PreviewCameraFragment extends CameraFragment {
         }).go();
     }
 
-    boolean isSingleShotProcessing() {
-        return (singleShotProcessing);
-    } // ignore
-
-
     protected Contract getContract() {
         return (Contract) getActivity();
     }
@@ -188,13 +196,16 @@ public class PreviewCameraFragment extends CameraFragment {
             controls.shoot.setEnabled(false);
         }
 
+        setProgress(true);
         PictureTransaction xact = new PictureTransaction(getHost());
-
-            xact.flashMode(flashLevel);
-
-        takePicture(xact);
+        xact.flashMode(flashLevel);
+        takePictureShedule(xact);
     }
 
+    @Background
+    protected void takePictureShedule(PictureTransaction xact) {
+        takePicture(xact);
+    }
 
     protected void zoom() {
         if (zoomLevel > 0) {
@@ -250,11 +261,13 @@ public class PreviewCameraFragment extends CameraFragment {
             } else {
                 super.saveImage(xact, image);
             }
+            setProgress(false);
         }
 
         @Override
         public void autoFocusAvailable() {
             zoom();
+
         }
 
         @Override
@@ -294,7 +307,7 @@ public class PreviewCameraFragment extends CameraFragment {
                 }
             });
 
-            controls.rotate.setFlashListener(new FfcRfcCameraButton.CameraFacingListener() {
+            controls.rotate.setRareFrontCameraChangeListener(new FfcRfcCameraButton.CameraFacingListener() {
                 @Override
                 public void onFFC() {
                     cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
@@ -305,7 +318,6 @@ public class PreviewCameraFragment extends CameraFragment {
                 public void onRFC() {
                     cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
                     camera.resetCamera();
-
                 }
             });
             if (cameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
@@ -315,7 +327,6 @@ public class PreviewCameraFragment extends CameraFragment {
             if (doesZoomReallyWork() && parameters.getMaxZoom() > 0) {
                 controls.zoom.setMax(parameters.getMaxZoom());
                 controls.zoom.setEnabled(true);
-
             } else {
                 controls.zoom.setEnabled(false);
             }
@@ -328,6 +339,7 @@ public class PreviewCameraFragment extends CameraFragment {
         public void onAutoFocus(boolean success, Camera camera) {
             super.onAutoFocus(success, camera);
             controls.shoot.setEnabled(true);
+            setProgress(false);
         }
 
         @Override

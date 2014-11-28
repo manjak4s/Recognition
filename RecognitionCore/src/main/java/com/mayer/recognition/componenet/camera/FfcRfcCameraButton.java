@@ -1,19 +1,13 @@
 package com.mayer.recognition.componenet.camera;
 
 import android.content.Context;
-import android.hardware.Camera.Parameters;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
-import com.mayer.recognition.R;
 import com.mayer.recognition.util.CameraUtil;
 
 import org.androidannotations.annotations.EView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dot on 23.11.2014.
@@ -22,17 +16,17 @@ import java.util.List;
 public class FfcRfcCameraButton extends ToggleButton implements View.OnClickListener {
 
     private String mState;
-    private CameraFacingListener mFlashListener;
+    private CameraFacingListener flashListener;
 
     @Override
     public void onClick(View v) {
-        if (mFlashListener == null) {
+        if (flashListener == null) {
             return;
         }
         if (isChecked()) {
-            mFlashListener.onFFC();
+            flashListener.onFFC();
         } else {
-            mFlashListener.onRFC();
+            flashListener.onRFC();
         }
     }
 
@@ -56,10 +50,10 @@ public class FfcRfcCameraButton extends ToggleButton implements View.OnClickList
     }
 
     public CameraFacingListener getFlashListener() {
-        return mFlashListener;
+        return flashListener;
     }
 
-    public void setFlashListener(CameraFacingListener flashListener) {
-        this.mFlashListener = flashListener;
+    public void setRareFrontCameraChangeListener(CameraFacingListener flashListener) {
+        this.flashListener = flashListener;
     }
 }

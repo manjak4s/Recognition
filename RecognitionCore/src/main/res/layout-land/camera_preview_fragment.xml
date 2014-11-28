@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
     android:id="@+id/camera_holder"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.commonsware.cwac.camera.CameraView
         android:id="@+id/camera"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
+    <include layout="@layout/progress_overlay"/>
 
     <com.mayer.recognition.componenet.camera.CameraControlsView_
-        android:layout_gravity="right|center_vertical"
         android:id="@+id/controls"
-        android:thumb="@drawable/thumb"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:thumb="@drawable/thumb"/>
 </FrameLayout>
 
