@@ -1,20 +1,9 @@
-import com.android.build.OutputFile;
-
 def findResDirs = {
     return file(it).listFiles().findAll { it.name.startsWith('res') }.collect()
 }
 
-ext.asVersion = '1.10.0'
-ext.aaVersion = '3.0.1'
-ext.groundyVersion = '1.5'
-ext.easyCamera = '0.0.1'
-
 apply plugin: 'com.android.application'
-apply plugin: 'aptlibs'
-
-configurations {
-    apt
-}
+apply plugin: 'android-apt'
 
 repositories {
     mavenCentral()
@@ -27,28 +16,36 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "com.github.hamsterksu:android-annotatedsql-api:${asVersion}"
-    compile "com.telly:groundy:${groundyVersion}"
-    compile "org.androidannotations:androidannotations-api:${aaVersion}"
+    compile "com.github.hamsterksu:android-annotatedsql-api:+"
+    compile "com.github.hamsterksu:android-annotatedsql-processor:+"
+
+    compile "com.telly:groundy:+"
+
+    apt "org.androidannotations:androidannotations:+"
+    compile "org.androidannotations:androidannotations-api:+"
 
     compile "com.android.support:support-v4:${rootProject.ext.support4compat}"
     compile "com.android.support:support-v13:${rootProject.ext.support4compat}"
     compile "com.android.support:appcompat-v7:${rootProject.ext.support4compat}"
     compile "com.android.support:cardview-v7:${rootProject.ext.support4compat}"
     compile "com.android.support:recyclerview-v7:${rootProject.ext.support4compat}"
+
+    compile 'com.squareup.picasso:picasso:+'
+    compile 'com.google.guava:guava:+'
+    compile 'com.google.code.gson:gson:+'
+    compile 'net.sf.supercsv:super-csv:+'
+    compile 'com.squareup.okhttp:okhttp:+'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:+'
+    compile 'com.squareup.retrofit:retrofit:+'
+    compile 'com.squareup.okio:okio:+'
+    compile 'com.koushikdutta.urlimageviewhelper:urlimageviewhelper:+'
 }
 
-aptlibs {
-    annotatedSql {
-        version "${asVersion}"
-    }
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
 
-    groundy {
-        version "${groundyVersion}"
-    }
-
-    androidAnnotations {
-        version "${aaVersion}"
+        resourcePackageName 'com.mayer.recognition'
     }
 }
 
@@ -67,6 +64,7 @@ android {
     lintOptions {
         abortOnError false
         ignoreWarnings true
+        warning 'MissingTranslation'
     }
 
     sourceSets {
@@ -74,5 +72,18 @@ android {
             res.srcDirs = findResDirs('src/main')
             java.srcDirs = ['src/main/java', 'build/source/apt/${variant.dirName}']
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
     }
 }

@@ -86,6 +86,14 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
     }
 
     @Override
+    public void onBackPressed() {
+        if (drawerPisition != 0) {
+            drawerPisition = 0;
+            onItemClick(null, null, drawerPisition, 0);
+        }
+    }
+
+    @Override
     public CameraHost getCameraHost() {
         return(new SimpleCameraHost(this));
     }

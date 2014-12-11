@@ -6,9 +6,9 @@ ext {
 }
 
 buildscript {
-    def gradleVersion = System.env.CUSTOM_GRADLE != null ? System.env.CUSTOM_GRADLE : '0.14.2'
-    def hamsterAptVersion = '1.2.0'
+    def gradleVersion = System.env.CUSTOM_GRADLE != null ? System.env.CUSTOM_GRADLE : '1.0.0'
     def mavenVersion = '1.0'
+    def aptVersion = '1.4'
 
     repositories {
         jcenter()
@@ -20,8 +20,8 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "com.github.hamsterksu:android-aptlibs-gradle-plugin:$hamsterAptVersion"
         classpath "com.github.dcendents:android-maven-plugin:$mavenVersion"
+        classpath "com.neenbedankt.gradle.plugins:android-apt:$aptVersion"
     }
 }
 
@@ -32,10 +32,10 @@ allprojects {
         mavenCentral()
         jcenter()
         maven {
+            url 'https://github.com/Goddchen/mvn-repo/raw/master/'
+        }
+        maven {
             url "https://repo.commonsware.com.s3.amazonaws.com"
         }
     }
 }
-
-
-apply plugin: 'android-reporting'

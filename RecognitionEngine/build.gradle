@@ -9,7 +9,6 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.morkva.solution"
         minSdkVersion rootProject.ext.minVersion
         targetSdkVersion 20
         versionCode 1
