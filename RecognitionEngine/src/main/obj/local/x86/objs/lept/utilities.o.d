@@ -1,33 +1,33 @@
 obj/local/x86/objs/lept/utilities.o: \
  jni/com_googlecode_leptonica_android/utilities.cpp \
  jni/com_googlecode_leptonica_android/common.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/jni.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/api-level.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/assert.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/jni.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/api-level.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/assert.h \
  jni/com_googlecode_leptonica_android/src/src/allheaders.h \
  jni/com_googlecode_leptonica_android/src/src/alltypes.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdio.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdint.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/posix_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/stddef.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/compiler.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/kernel.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdlib.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/string.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/malloc.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/alloca.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/strings.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/memory.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdio.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdint.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/posix_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/stddef.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/compiler.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/kernel.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdlib.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/string.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/malloc.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/alloca.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/strings.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/memory.h \
  jni/com_googlecode_leptonica_android/src/src/environ.h \
  jni/com_googlecode_leptonica_android/src/src/array.h \
  jni/com_googlecode_leptonica_android/src/src/bbuffer.h \
@@ -49,68 +49,68 @@ obj/local/x86/objs/lept/utilities.o: \
  jni/com_googlecode_leptonica_android/src/src/regutils.h \
  jni/com_googlecode_leptonica_android/src/src/sudoku.h \
  jni/com_googlecode_leptonica_android/src/src/watershed.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/log.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/byteorder.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/little_endian.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/swab.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/generic.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/bitmap.h
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/log.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/byteorder.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/little_endian.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/swab.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/generic.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/bitmap.h
 
 jni/com_googlecode_leptonica_android/common.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/jni.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/jni.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/api-level.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/api-level.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/assert.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/assert.h:
 
 jni/com_googlecode_leptonica_android/src/src/allheaders.h:
 
 jni/com_googlecode_leptonica_android/src/src/alltypes.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdio.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdio.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdint.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdint.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/posix_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/stddef.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/stddef.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/compiler.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/compiler.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/kernel.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/kernel.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdlib.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdlib.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/string.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/string.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/malloc.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/malloc.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/alloca.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/alloca.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/strings.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/strings.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/memory.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/memory.h:
 
 jni/com_googlecode_leptonica_android/src/src/environ.h:
 
@@ -154,14 +154,14 @@ jni/com_googlecode_leptonica_android/src/src/sudoku.h:
 
 jni/com_googlecode_leptonica_android/src/src/watershed.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/log.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/log.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/byteorder.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/byteorder.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/little_endian.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/little_endian.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/swab.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/swab.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/byteorder/generic.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/byteorder/generic.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/bitmap.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/bitmap.h:

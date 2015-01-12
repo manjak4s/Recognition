@@ -31,14 +31,24 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${rootProject.ext.support4compat}"
 
     compile 'com.squareup.picasso:picasso:+'
+
     compile 'com.google.guava:guava:+'
+
     compile 'com.google.code.gson:gson:+'
+
     compile 'net.sf.supercsv:super-csv:+'
+
     compile 'com.squareup.okhttp:okhttp:+'
     compile 'com.squareup.okhttp:okhttp-urlconnection:+'
     compile 'com.squareup.retrofit:retrofit:+'
     compile 'com.squareup.okio:okio:+'
+
     compile 'com.koushikdutta.urlimageviewhelper:urlimageviewhelper:+'
+
+    compile 'de.greenrobot:eventbus:+'
+
+    compile "org.parceler:parceler-api:+"
+    provided "org.parceler:parceler:+"
 }
 
 apt {

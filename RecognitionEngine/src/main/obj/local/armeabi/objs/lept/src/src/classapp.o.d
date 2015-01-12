@@ -1,30 +1,30 @@
 obj/local/armeabi/objs/lept/src/src/classapp.o: \
  jni/com_googlecode_leptonica_android/src/src/classapp.c \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/string.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/android/api-level.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/malloc.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/string.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/android/api-level.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/malloc.h \
  jni/com_googlecode_leptonica_android/src/src/allheaders.h \
  jni/com_googlecode_leptonica_android/src/src/alltypes.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdio.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdint.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/_types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/machine/_types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/_wchar_limits.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/asm/types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/types.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdlib.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/alloca.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/strings.h \
- C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/memory.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdio.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdint.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/_types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/machine/_types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/_wchar_limits.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/asm/types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/types.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdlib.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/alloca.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/strings.h \
+ E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/memory.h \
  jni/com_googlecode_leptonica_android/src/src/environ.h \
  jni/com_googlecode_leptonica_android/src/src/array.h \
  jni/com_googlecode_leptonica_android/src/src/bbuffer.h \
@@ -47,55 +47,55 @@ obj/local/armeabi/objs/lept/src/src/classapp.o: \
  jni/com_googlecode_leptonica_android/src/src/sudoku.h \
  jni/com_googlecode_leptonica_android/src/src/watershed.h
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/string.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/string.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/android/api-level.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/android/api-level.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/malloc.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/malloc.h:
 
 jni/com_googlecode_leptonica_android/src/src/allheaders.h:
 
 jni/com_googlecode_leptonica_android/src/src/alltypes.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdio.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdio.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdint.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdint.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/_types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/_types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/machine/_types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/machine/_types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/_wchar_limits.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/_wchar_limits.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/asm/types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/asm/types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/linux/types.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/linux/types.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/stdlib.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/stdlib.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/alloca.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/alloca.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/strings.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/strings.h:
 
-C:/Environment/ndk_64/platforms/android-8/arch-arm/usr/include/memory.h:
+E:/Environment/NDK/platforms/android-8/arch-arm/usr/include/memory.h:
 
 jni/com_googlecode_leptonica_android/src/src/environ.h:
 

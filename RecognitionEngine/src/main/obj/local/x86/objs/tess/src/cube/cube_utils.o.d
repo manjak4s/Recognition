@@ -1,57 +1,57 @@
 obj/local/x86/objs/tess/src/cube/cube_utils.o: \
  jni/com_googlecode_tesseract_android/src/cube/cube_utils.cpp \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/ctype.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/api-level.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/unistd.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdint.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/posix_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/stddef.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/compiler.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/kernel.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/select.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/time.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/time.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/signal.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/limits.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/limits.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/limits.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/internal_types.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/limits.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/syslimits.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/page.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/page_32.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/string.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/malloc.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/signal.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm-generic/signal.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/sigcontext.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/siginfo.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/ucontext.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/user.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysconf.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/capability.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/pathconf.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/math.h \
- C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/string \
- C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/ctype.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/api-level.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/unistd.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdint.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/posix_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/stddef.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/compiler.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/kernel.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/select.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/time.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/time.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/signal.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/limits.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/limits.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/limits.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/internal_types.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/limits.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/syslimits.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/page.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/page_32.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/string.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/malloc.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/signal.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm-generic/signal.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/sigcontext.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/siginfo.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/ucontext.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/user.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysconf.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/capability.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/pathconf.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/math.h \
+ E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/string \
+ E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
  jni/com_googlecode_tesseract_android/src/cube/cube_utils.h \
  jni/com_googlecode_leptonica_android/src/src/allheaders.h \
  jni/com_googlecode_leptonica_android/src/src/alltypes.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdlib.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/alloca.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/strings.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/memory.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdlib.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/alloca.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/strings.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/memory.h \
  jni/com_googlecode_leptonica_android/src/src/environ.h \
  jni/com_googlecode_leptonica_android/src/src/array.h \
  jni/com_googlecode_leptonica_android/src/src/bbuffer.h \
@@ -75,7 +75,7 @@ obj/local/x86/objs/tess/src/cube/cube_utils.o: \
  jni/com_googlecode_leptonica_android/src/src/watershed.h \
  jni/com_googlecode_tesseract_android/src/cutil/const.h \
  jni/com_googlecode_tesseract_android/src/cube/char_set.h \
- C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
+ E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
  jni/com_googlecode_tesseract_android/src/cube/string_32.h \
  jni/com_googlecode_tesseract_android/src/ccutil/tessdatamanager.h \
  jni/com_googlecode_tesseract_android/src/ccutil/host.h \
@@ -85,7 +85,7 @@ obj/local/x86/objs/tess/src/cube/cube_utils.o: \
  jni/com_googlecode_tesseract_android/src/ccutil/tprintf.h \
  jni/com_googlecode_tesseract_android/src/ccutil/params.h \
  jni/com_googlecode_tesseract_android/src/ccutil/genericvector.h \
- C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/assert.h \
+ E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/assert.h \
  jni/com_googlecode_tesseract_android/src/ccutil/tesscallback.h \
  jni/com_googlecode_tesseract_android/src/ccutil/errcode.h \
  jni/com_googlecode_tesseract_android/src/ccutil/helpers.h \
@@ -101,95 +101,95 @@ obj/local/x86/objs/tess/src/cube/cube_utils.o: \
  jni/com_googlecode_tesseract_android/src/cube/cached_file.h \
  jni/com_googlecode_tesseract_android/src/ccutil/unichar.h
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/ctype.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/ctype.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/android/api-level.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/android/api-level.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/unistd.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/unistd.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdint.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdint.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/posix_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/stddef.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/stddef.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/compiler.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/compiler.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/posix_types_32.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/kernel.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/kernel.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysmacros.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/select.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/select.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/time.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/time.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/time.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/time.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/signal.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/signal.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/limits.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/limits.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/limits.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/limits.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/limits.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/limits.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/internal_types.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/internal_types.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/machine/limits.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/machine/limits.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/syslimits.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/syslimits.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/page.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/page.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/page_32.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/page_32.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/string.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/string.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/malloc.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/malloc.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/signal.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/signal.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm-generic/signal.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm-generic/signal.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/sigcontext.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/sigcontext.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm/siginfo.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm/siginfo.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/asm-generic/siginfo.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/ucontext.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/ucontext.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/user.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/user.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/sys/sysconf.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/sys/sysconf.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/linux/capability.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/linux/capability.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/pathconf.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/pathconf.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/math.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/math.h:
 
-C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/string:
+E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/string:
 
-C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/vector:
+E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/vector:
 
 jni/com_googlecode_tesseract_android/src/cube/cube_utils.h:
 
@@ -197,13 +197,13 @@ jni/com_googlecode_leptonica_android/src/src/allheaders.h:
 
 jni/com_googlecode_leptonica_android/src/src/alltypes.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/stdlib.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/stdlib.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/alloca.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/alloca.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/strings.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/strings.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/memory.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/memory.h:
 
 jni/com_googlecode_leptonica_android/src/src/environ.h:
 
@@ -251,7 +251,7 @@ jni/com_googlecode_tesseract_android/src/cutil/const.h:
 
 jni/com_googlecode_tesseract_android/src/cube/char_set.h:
 
-C:/Environment/ndk_64/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
+E:/Environment/NDK/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
 
 jni/com_googlecode_tesseract_android/src/cube/string_32.h:
 
@@ -271,7 +271,7 @@ jni/com_googlecode_tesseract_android/src/ccutil/params.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/genericvector.h:
 
-C:/Environment/ndk_64/platforms/android-9/arch-x86/usr/include/assert.h:
+E:/Environment/NDK/platforms/android-9/arch-x86/usr/include/assert.h:
 
 jni/com_googlecode_tesseract_android/src/ccutil/tesscallback.h:
 
