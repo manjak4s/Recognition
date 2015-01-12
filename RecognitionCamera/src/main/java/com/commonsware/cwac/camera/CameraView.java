@@ -43,7 +43,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
     static final String TAG = "CWAC-Camera";
     private PreviewStrategy previewStrategy;
     private Camera.Size previewSize;
-    private Camera camera = null;
+    public Camera camera = null;
     private boolean inPreview = false;
     private CameraHost host = null;
     private OnOrientationChange onOrientationChange = null;
@@ -250,6 +250,7 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
     }
 
     public void takePicture(final PictureTransaction xact) throws IllegalStateException {
+
         if (inPreview) {
             if (isAutoFocusing) {
                 throw new IllegalStateException("Camera cannot take a picture while auto-focusing");

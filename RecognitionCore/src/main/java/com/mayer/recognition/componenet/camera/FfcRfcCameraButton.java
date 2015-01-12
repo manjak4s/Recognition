@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ToggleButton;
 
+import com.mayer.recognition.util.AnimatorUtil;
 import com.mayer.recognition.util.CameraUtil;
 
 import org.androidannotations.annotations.EView;
@@ -20,6 +21,7 @@ public class FfcRfcCameraButton extends ToggleButton implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        AnimatorUtil.animate(v);
         if (flashListener == null) {
             return;
         }

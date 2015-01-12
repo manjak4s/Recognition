@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.mayer.recognition.R;
+import com.mayer.recognition.util.AnimatorUtil;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EView;
@@ -39,6 +40,7 @@ public class FlashButton extends ImageButton implements View.OnClickListener {
         if (states == null || states.size() == 0) {
             return;
         }
+        AnimatorUtil.animate(v);
         int statePosition = ((states.indexOf(mState) + 1) % states.size());
         setState(states.get(statePosition));
         performFlashClick();
