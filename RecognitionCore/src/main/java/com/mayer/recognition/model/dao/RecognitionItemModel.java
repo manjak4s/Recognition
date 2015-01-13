@@ -20,6 +20,12 @@ public class RecognitionItemModel implements Serializable {
 
     protected double latitudeTaken;
 
+    protected String plainBody;
+
+    protected RecognizedItemModel model;
+
+    protected DiscountType discountType;
+
     public RecognitionItemModel(long id, Date date, boolean favourite, String url, double longitudeTaken, double latitudeTaken) {
         this.id = id;
         this.date = date;

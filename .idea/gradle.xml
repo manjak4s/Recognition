@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/MaterialDesign" />
+            <option value="$PROJECT_DIR$/PluginLoader" />
             <option value="$PROJECT_DIR$/RecognitionCamera" />
             <option value="$PROJECT_DIR$/RecognitionCore" />
             <option value="$PROJECT_DIR$/RecognitionEngine" />
