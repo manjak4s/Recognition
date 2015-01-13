@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by irikhmayer on 13.01.2015.
  */
-public class RecognizedItemModel implements Serializable {
+public class ItemModel implements Serializable {
 
     protected List<RecognizedLineModel> items;
 
@@ -19,7 +19,7 @@ public class RecognizedItemModel implements Serializable {
 
     protected DiscountType discountType;
 
-    public RecognizedItemModel(List<RecognizedLineModel> items, BigDecimal discount, BigDecimal tips, BigDecimal tax, DiscountType discountType) {
+    public ItemModel(List<RecognizedLineModel> items, BigDecimal discount, BigDecimal tips, BigDecimal tax, DiscountType discountType) {
         this.items = items;
         this.discount = discount;
         this.tips = tips;
@@ -27,7 +27,7 @@ public class RecognizedItemModel implements Serializable {
         this.discountType = discountType;
     }
 
-    public RecognizedItemModel() {
+    public ItemModel() {
     }
 
     public List<RecognizedLineModel> getItems() {

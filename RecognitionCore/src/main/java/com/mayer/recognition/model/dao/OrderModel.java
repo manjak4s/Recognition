@@ -1,12 +1,19 @@
 package com.mayer.recognition.model.dao;
 
+import android.content.ContentValues;
+
+import com.mayer.recognition.database.Storage;
+
 import java.io.Serializable;
 import java.util.Date;
+
+import static com.mayer.recognition.util.ContentValueUtil.date;
+import static com.mayer.recognition.util.ContentValueUtil.decimal;
 
 /**
  * Created by dot on 13.01.2015.
  */
-public class RecognitionItemModel implements Serializable {
+public class OrderModel implements Serializable, IValueModel {
 
     protected long id;
 
@@ -22,11 +29,11 @@ public class RecognitionItemModel implements Serializable {
 
     protected String plainBody;
 
-    protected RecognizedItemModel model;
+    protected ItemModel model;
 
     protected DiscountType discountType;
 
-    public RecognitionItemModel(long id, Date date, boolean favourite, String url, double longitudeTaken, double latitudeTaken) {
+    public OrderModel(long id, Date date, boolean favourite, String url, double longitudeTaken, double latitudeTaken) {
         this.id = id;
         this.date = date;
         this.favourite = favourite;
@@ -35,11 +42,7 @@ public class RecognitionItemModel implements Serializable {
         this.latitudeTaken = latitudeTaken;
     }
 
-    public RecognitionItemModel() {
-    }
-
-    public long getId() {
-        return id;
+    public OrderModel() {
     }
 
     public void setId(long id) {
@@ -84,5 +87,25 @@ public class RecognitionItemModel implements Serializable {
 
     public void setLatitudeTaken(double latitudeTaken) {
         this.latitudeTaken = latitudeTaken;
+    }
+
+    @Override
+    public long getGuid() {
+        return id;
+    }
+
+    @Override
+    public ContentValues toValues() {
+        ContentValues v = new ContentValues();
+        v.put(Storage.RecognitionOrderTable.ID, id);
+        v.put(Storage.RecognitionOrderTable.CREATE_TIME, date(date));
+        v.put(Storage.RecognitionOrderTable.FAVOURITE, favourite);
+        v.put(Storage.RecognitionOrderTable.URL, url);
+        v.put(Storage.RecognitionOrderTable.LONGITUDE_TAKEN, longitudeTaken);
+        v.put(Storage.RecognitionOrderTable.LATITUDE_TAKEN, latitudeTaken);
+        v.put(Storage.RecognitionOrderTable.DISCOUNT_TYPE, model.discountType.ordinal());
+        v.put(Storage.RecognitionOrderTable.DISCOUNT_VALUE, decimal(model.discount));
+        v.put(Storage.RecognitionOrderTable.TIPS_VALUE, decimal(model.tips));
+        return v;
     }
 }

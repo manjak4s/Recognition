@@ -32,16 +32,10 @@ public abstract class Storage {
         String ID = "_id";
 
         @Column(type = Column.Type.INTEGER, defVal = "0")
-        String favourite = "favourite";
+        String FAVOURITE = "favourite";
 
         @Column(type = Column.Type.TEXT)
-        String url = "image_url";
-
-        @Column(type = Column.Type.TEXT)
-        String longitudeTaken = "longitudeTaken";
-
-        @Column(type = Column.Type.TEXT)
-        String latitudeTaken = "latitudeTaken";
+        String URL = "image_url";
 
         @Column(type = Column.Type.INTEGER)
         String CREATE_TIME = Storage.CREATE_TIME;
@@ -49,16 +43,16 @@ public abstract class Storage {
 
     public static interface IReceiptTable extends ISyncTable {
         @Column(type = Column.Type.TEXT)
-        String discount_value = "discount_value";
+        String DISCOUNT_VALUE = "discount_value";
 
         @Column(type = Column.Type.INTEGER)
-        String discount_type = "discount_type";
+        String DISCOUNT_TYPE = "discount_type";
 
         @Column(type = Column.Type.TEXT)
-        String tips_value = "tips_value";
+        String TIPS_VALUE = "tips_value";
 
         @Column(type = Column.Type.TEXT)
-        String tax_value = "tax_value";
+        String TAX_VALUE = "tax_value";
     }
 
     @Table(RecognitionOrderTable.TABLE_NAME)
@@ -70,10 +64,16 @@ public abstract class Storage {
         String TABLE_NAME = "recognition_item";
 
         @Column(type = Column.Type.TEXT)
-        String plain_body = "plain_body";
+        String PLAIN_BODY = "plain_body";
 
         @Column(type = Column.Type.TEXT)
-        String total_price = "total_price";
+        String TOTAL_PRICE = "total_price";
+
+        @Column(type = Column.Type.TEXT)
+        String LONGITUDE_TAKEN = "longitudeTaken";
+
+        @Column(type = Column.Type.TEXT)
+        String LATITUDE_TAKEN = "latitudeTaken";
     }
 
     @Table(RecognitionSubitemTable.TABLE_NAME)
@@ -86,13 +86,13 @@ public abstract class Storage {
         String TABLE_NAME = "recognition_subitem";
 
         @Column(type = Column.Type.TEXT)
-        String total_price = "total_price";
+        String TOTAL_PRICE = "total_price";
 
         @Column(type = Column.Type.TEXT)
-        String price = "price";
+        String PRICE = "price";
 
         @Column(type = Column.Type.TEXT)
-        String quantity = "quantity";
+        String QUANTITY = "quantity";
 
         @NotNull
         @Column(type = Column.Type.INTEGER)
