@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public interface IUpdateContainer {
 
-    int VERSION1 = 252;
-    int VERSION2 = 100500;
+    int VERSION1 = 1;
+    int VERSION2 = 2;
 
     void onUpdate(final SQLiteDatabase db);
     int getSqlOldVersion();

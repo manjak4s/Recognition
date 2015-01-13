@@ -8,13 +8,15 @@ import com.annotatedsql.annotation.provider.Provider;
 import com.annotatedsql.annotation.provider.URI;
 import com.annotatedsql.annotation.sql.Autoincrement;
 import com.annotatedsql.annotation.sql.Column;
+import com.annotatedsql.annotation.sql.Index;
+import com.annotatedsql.annotation.sql.Indexes;
 import com.annotatedsql.annotation.sql.NotNull;
 import com.annotatedsql.annotation.sql.PrimaryKey;
 import com.annotatedsql.annotation.sql.Schema;
 import com.annotatedsql.annotation.sql.Table;
 
 @Schema(className = "StorageSchema", dbName = "storage.db", dbVersion = 1)
-@Provider(name = "StorageProvider", authority = "com.mayer.recognition.database.AUTHORITY", schemaClass = "StorageSchema", openHelperClass = "DatabaseHelper")
+@Provider(name = "StorageProvider", authority = "com.mayer.recognition.database.AUTHORITY", schemaClass = "StorageSchema", openHelperClass = "StorageHelper")
 public abstract class Storage {
 
     public static final String CREATE_TIME = "update_time";
@@ -75,6 +77,7 @@ public abstract class Storage {
     }
 
     @Table(RecognitionSubitemTable.TABLE_NAME)
+    @Indexes(@Index(name = "order", columns = RecognitionSubitemTable.ORDER_ID))
     public static interface RecognitionSubitemTable extends IReceiptTable {
 
         @URI
@@ -95,4 +98,8 @@ public abstract class Storage {
         @Column(type = Column.Type.INTEGER)
         String ORDER_ID = "order_id";
     }
+
+//    static {
+//        applyForeignKeys(RecognitionSubitemTable.TABLE_NAME, foreignKey(RecognitionSubitemTable.ORDER_ID, RecognitionOrderTable.TABLE_NAME, RecognitionOrderTable.ID));
+//    }
 }
