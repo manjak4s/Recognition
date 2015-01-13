@@ -1,7 +1,13 @@
 package com.mayer.recognition.fragment.history;
 
+import android.app.Fragment;
+import android.app.ListFragment;
+
+import org.androidannotations.annotations.EFragment;
+
 /**
  * Created by dot on 19.11.2014.
  */
-public class HistoryListFragment {
+@EFragment
+public class HistoryListFragment extends ListFragment {
 }
