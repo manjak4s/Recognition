@@ -15,9 +15,11 @@ import com.annotatedsql.annotation.sql.PrimaryKey;
 import com.annotatedsql.annotation.sql.Schema;
 import com.annotatedsql.annotation.sql.Table;
 
-@Schema(className = "StorageSchema", dbName = "storage.db", dbVersion = 1)
+@Schema(className = "StorageSchema", dbName = "storage.db", dbVersion = Storage.DB_VERSION)
 @Provider(name = "StorageProvider", authority = "com.mayer.recognition.database.AUTHORITY", schemaClass = "StorageSchema", openHelperClass = "StorageHelper")
 public abstract class Storage {
+
+    public static final int DB_VERSION = 2;
 
     public static final String CREATE_TIME = "update_time";
 
@@ -36,9 +38,6 @@ public abstract class Storage {
 
         @Column(type = Column.Type.TEXT)
         String URL = "image_url";
-
-        @Column(type = Column.Type.INTEGER)
-        String CREATE_TIME = Storage.CREATE_TIME;
     }
 
     public static interface IReceiptTable extends ISyncTable {
@@ -47,9 +46,6 @@ public abstract class Storage {
 
         @Column(type = Column.Type.INTEGER)
         String DISCOUNT_TYPE = "discount_type";
-
-        @Column(type = Column.Type.TEXT)
-        String TIPS_VALUE = "tips_value";
 
         @Column(type = Column.Type.TEXT)
         String TAX_VALUE = "tax_value";
@@ -74,6 +70,12 @@ public abstract class Storage {
 
         @Column(type = Column.Type.TEXT)
         String LATITUDE_TAKEN = "latitudeTaken";
+
+        @Column(type = Column.Type.INTEGER)
+        String CREATE_TIME = Storage.CREATE_TIME;
+
+        @Column(type = Column.Type.TEXT)
+        String TIPS_VALUE = "tips_value";
     }
 
     @Table(RecognitionSubitemTable.TABLE_NAME)
@@ -97,6 +99,9 @@ public abstract class Storage {
         @NotNull
         @Column(type = Column.Type.INTEGER)
         String ORDER_ID = "order_id";
+
+        @Column(type = Column.Type.INTEGER, defVal = "0")
+        String SELECTER = "selected";
     }
 
 //    static {

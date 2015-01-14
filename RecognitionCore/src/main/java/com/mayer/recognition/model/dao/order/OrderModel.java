@@ -1,8 +1,9 @@
-package com.mayer.recognition.model.dao;
+package com.mayer.recognition.model.dao.order;
 
 import android.content.ContentValues;
 
 import com.mayer.recognition.database.Storage;
+import com.mayer.recognition.model.dao.IValueModel;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,12 +30,11 @@ public class OrderModel implements Serializable, IValueModel {
 
     protected String plainBody;
 
-    protected ItemModel model;
+    protected OrderMathModel model;
 
     protected DiscountType discountType;
 
-    public OrderModel(long id, Date date, boolean favourite, String url, double longitudeTaken, double latitudeTaken) {
-        this.id = id;
+    public OrderModel(Date date, boolean favourite, String url, double longitudeTaken, double latitudeTaken) {
         this.date = date;
         this.favourite = favourite;
         this.url = url;
@@ -97,7 +97,6 @@ public class OrderModel implements Serializable, IValueModel {
     @Override
     public ContentValues toValues() {
         ContentValues v = new ContentValues();
-        v.put(Storage.RecognitionOrderTable.ID, id);
         v.put(Storage.RecognitionOrderTable.CREATE_TIME, date(date));
         v.put(Storage.RecognitionOrderTable.FAVOURITE, favourite);
         v.put(Storage.RecognitionOrderTable.URL, url);

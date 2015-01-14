@@ -1,8 +1,12 @@
 package com.mayer.recognition.util;
 
+import android.database.Cursor;
+import android.text.TextUtils;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -11,6 +15,9 @@ import java.util.Locale;
  */
 public class ContentValueUtil {
 
+    public static final int DECIMAL_SCALE = 2;
+    public static final int QUANTITY_SCALE = 3;
+
     private static DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
     public static String decimal(BigDecimal decimal) {
@@ -18,6 +25,25 @@ public class ContentValueUtil {
             return "";
         }
         return decimalFormat.get().format(decimal);
+    }
+
+    public static String decimal(BigDecimal decimal, int scale) {
+        if (decimal == null) {
+            return "";
+        }
+
+        return scale <= DECIMAL_SCALE ? decimalFormat.get().format(decimal) : quantityFormat.get().format(decimal);
+    }
+
+    public static BigDecimal decimal(String decimalValue, int scale) {
+        if (TextUtils.isEmpty(decimalValue))
+            return BigDecimal.ZERO;
+        try {
+            return (BigDecimal) (scale <= DECIMAL_SCALE ? decimalFormat.get().parse(decimalValue) : quantityFormat.get().parse(decimalValue));
+        } catch (ParseException e) {
+            Logger.e("Parse number error", e);
+        }
+        return BigDecimal.ZERO;
     }
 
     public static long _long(String value, long def) {
@@ -54,6 +80,14 @@ public class ContentValueUtil {
         if (time == 0)
             return null;
         return new Date(time);
+    }
+
+    public static String decimalQty(BigDecimal decimal) {
+        return decimal(decimal, QUANTITY_SCALE);
+    }
+
+    public static BigDecimal decimalQty(Cursor c, int columnIndex) {
+        return decimal(c.getString(columnIndex), QUANTITY_SCALE);
     }
 
     private static ThreadLocal<DecimalFormat> decimalFormat = new ThreadLocal<DecimalFormat>() {
