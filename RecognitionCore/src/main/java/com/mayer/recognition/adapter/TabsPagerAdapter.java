@@ -5,9 +5,8 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import com.mayer.recognition.R;
-import com.mayer.recognition.fragment.TestFragment;
 import com.mayer.recognition.fragment.camera.PreviewCameraFragment_;
-import com.mayer.recognition.fragment.history.HistoryListFragment_;
+import com.mayer.recognition.fragment.history.HistoryOrderItemListFragment_;
 import com.mayer.recognition.model.ui.TabViewModel;
 import com.mayer.recognition.util.Logger;
 import com.mayer.recognition.util.ResourceHelper;
@@ -35,7 +34,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         TABS.add(1, new TabViewModel() {
             @Override
             public Fragment getFragmentInstance() {
-                return new HistoryListFragment_();
+                return new HistoryOrderItemListFragment_();
             }
 
             @Override
@@ -46,7 +45,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         TABS.add(2, new TabViewModel() {
             @Override
             public Fragment getFragmentInstance() {
-                return new HistoryListFragment_();
+                return new HistoryOrderItemListFragment_();
             }
 
             @Override

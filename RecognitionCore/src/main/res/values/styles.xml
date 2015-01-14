@@ -35,4 +35,22 @@
         <item name="android:layout_gravity">bottom</item>
     </style>
 
+    <style name="ItemList.ItemLayout">
+        <item name="android:minHeight">46dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="ItemList.ItemText">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
 </resources>

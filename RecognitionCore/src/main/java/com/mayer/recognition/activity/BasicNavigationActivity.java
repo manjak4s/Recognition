@@ -35,9 +35,9 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.launcher)
 public class BasicNavigationActivity extends ActionBarActivity implements CameraHostProvider,
-        PreviewCameraFragment.Contract,
-        ViewPager.OnPageChangeListener,
-        AdapterView.OnItemClickListener {
+                                                                          PreviewCameraFragment.Contract,
+                                                                          ViewPager.OnPageChangeListener,
+                                                                          AdapterView.OnItemClickListener {
 
     @ViewById
     protected Toolbar toolbar;
@@ -59,7 +59,7 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
 
     protected DrawerManuAdapter drawerAdapter;
 
-    private ActionBarDrawerToggle toggle;
+    protected ActionBarDrawerToggle toggle;
 
     protected TabsPagerAdapter fragmentAdapter;
 
@@ -128,5 +128,4 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
         drawerPisition = position;
         pager.setCurrentItem(drawerPisition);
     }
-
 }
