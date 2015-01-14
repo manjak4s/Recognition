@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Bill Buddy</string>
+
     <string name="title_activity_launcher">Bill Recognition</string>
     <string name="title_scan">Scan !</string>
     <string name="title_calculate">Results</string>
@@ -25,4 +26,8 @@
 
     <string name="close">Close</string>
     <string name="open">Open</string>
+
+    <string name="list_header_description">Info</string>
+    <string name="list_header_date">Taken</string>
+    <string name="list_header_snapshot">Preview</string>
 </resources>
