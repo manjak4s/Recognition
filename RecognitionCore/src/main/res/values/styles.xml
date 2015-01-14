@@ -48,9 +48,16 @@
         <item name="android:paddingLeft">2dp</item>
         <item name="android:paddingRight">2dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/grey_800</item>
+        <item name="android:textColor">@drawable/selector_order_list_item</item>
         <item name="android:textStyle">normal</item>
         <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ItemList.ItemImage">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
 </resources>

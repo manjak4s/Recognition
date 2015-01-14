@@ -11,13 +11,9 @@ buildscript {
     def aptVersion = '1.4'
 
     repositories {
-        jcenter()
-        if (System.env.CUSTOM_REPO != null) {
-            maven { url System.env.CUSTOM_REPO }
-        } else {
-            mavenCentral()
-        }
+        mavenCentral()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "com.github.dcendents:android-maven-plugin:$mavenVersion"
@@ -25,17 +21,12 @@ buildscript {
     }
 }
 
-allprojects {
-    version = '1.0'
+repositories {
+    mavenCentral()
+}
 
+allprojects {
     repositories {
         mavenCentral()
-        jcenter()
-        maven {
-            url 'https://github.com/Goddchen/mvn-repo/raw/master/'
-        }
-        maven {
-            url "https://repo.commonsware.com.s3.amazonaws.com"
-        }
     }
 }

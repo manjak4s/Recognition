@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     style="@style/ItemList.ItemLayout"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:background="@drawable/background_order_list_item"
+
+    card_view:cardCornerRadius="6dp"
+    card_view:cardBackgroundColor="@drawable/background_order_list_item"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/unit_serial"
+    <ImageView
+        android:id="@+id/image_view"
         style="@style/ItemList.ItemText"
-        android:textColor="@drawable/selector_order_list_item"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/unit_warranty"
+        android:id="@+id/description_label"
         style="@style/ItemList.ItemText"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/unit_status"
+        android:id="@+id/date_label"
         style="@style/ItemList.ItemText"
         android:ellipsize="end"
-        android:singleLine="true"
+
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5" />
 
 
-</LinearLayout>
+</CardView>

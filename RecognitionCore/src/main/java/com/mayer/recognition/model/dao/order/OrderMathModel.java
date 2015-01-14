@@ -19,8 +19,22 @@ public class OrderMathModel implements Serializable {
 
     protected DiscountType discountType;
 
-    public OrderMathModel(List<OrderItemMathModel> items, BigDecimal discount, BigDecimal tips, BigDecimal tax, DiscountType discountType) {
+    public OrderMathModel(List<OrderItemMathModel> items,
+                          BigDecimal discount,
+                          BigDecimal tips,
+                          BigDecimal tax,
+                          DiscountType discountType) {
         this.items = items;
+        this.discount = discount;
+        this.tips = tips;
+        this.tax = tax;
+        this.discountType = discountType;
+    }
+
+    public OrderMathModel(BigDecimal discount,
+                          BigDecimal tips,
+                          BigDecimal tax,
+                          DiscountType discountType) {
         this.discount = discount;
         this.tips = tips;
         this.tax = tax;

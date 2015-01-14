@@ -21,7 +21,7 @@ public abstract class ObjectCursorAdapter<Type> extends BaseAdapter implements C
         this.mContext = context;
     }
 
-    public Context getmContext() {
+    public Context getContext() {
         return mContext;
     }
 

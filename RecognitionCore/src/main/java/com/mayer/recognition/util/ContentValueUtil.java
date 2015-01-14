@@ -3,6 +3,8 @@ package com.mayer.recognition.util;
 import android.database.Cursor;
 import android.text.TextUtils;
 
+import com.mayer.recognition.model.dao.order.DiscountType;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -19,6 +21,10 @@ public class ContentValueUtil {
     public static final int QUANTITY_SCALE = 3;
 
     private static DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+
+    public static DiscountType discountType(Cursor c, int index) {
+        return c.isNull(index) ? null : DiscountType.values()[ c.getInt(index) ];
+    }
 
     public static String decimal(BigDecimal decimal) {
         if (decimal == null) {
@@ -44,6 +50,22 @@ public class ContentValueUtil {
             Logger.e("Parse number error", e);
         }
         return BigDecimal.ZERO;
+    }
+
+    public static BigDecimal decimal(Cursor c, int columnIndex) {
+        return decimal(c.getString(columnIndex));
+    }
+
+    public static BigDecimal decimal(String decimalValue) {
+        if (TextUtils.isEmpty(decimalValue)) {
+            return BigDecimal.ZERO;
+        }
+        try {
+            return (BigDecimal) decimalFormat.get().parse(decimalValue);
+        } catch (ParseException e) {
+            Logger.e("Parse number error", e);
+            return BigDecimal.ZERO;
+        }
     }
 
     public static long _long(String value, long def) {
@@ -73,6 +95,10 @@ public class ContentValueUtil {
             return "";
         }
         return String.valueOf(value.getTime());
+    }
+
+    public static Date nullableDate(Cursor c, int index) {
+        return c.isNull(index) ? null : new Date(c.getLong(index));
     }
 
     public static Date date(String value) {
