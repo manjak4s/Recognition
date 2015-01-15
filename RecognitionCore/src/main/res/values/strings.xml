@@ -26,6 +26,8 @@
 
     <string name="close">Close</string>
     <string name="open">Open</string>
+    <string name="cancel">CANCEL</string>
+    <string name="ok">OK</string>
 
     <string name="list_header_description">Info</string>
     <string name="list_header_date">Taken</string>

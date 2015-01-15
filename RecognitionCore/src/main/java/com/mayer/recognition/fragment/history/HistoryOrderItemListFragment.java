@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.mayer.recognition.R;
-import com.mayer.recognition.database.nonsupport.CursorLoaderBuilder;
+import com.getbase.android.db.loaders.CursorLoaderBuilder;
 import com.mayer.recognition.database.Storage;
 import com.mayer.recognition.database.StorageProvider;
 import com.mayer.recognition.database.function.OrderItemModelFunction;

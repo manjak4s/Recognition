@@ -1,4 +1,4 @@
-package com.mayer.recognition.database.nonsupport;
+package com.getbase.android.db.loaders;
 
 import com.getbase.android.db.cursors.Cursors;
 import com.google.common.base.Function;

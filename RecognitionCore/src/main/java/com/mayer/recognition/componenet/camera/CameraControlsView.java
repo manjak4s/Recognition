@@ -2,15 +2,11 @@ package com.mayer.recognition.componenet.camera;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.ToggleButton;
 
 import com.mayer.recognition.R;
-import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -18,7 +14,7 @@ import org.androidannotations.annotations.ViewById;
 /**
  * Created by dot on 14.11.2014.
  */
-@EViewGroup(R.layout.camera_controls)
+@EViewGroup(R.layout.camera_preview_controls)
 public class CameraControlsView extends GridLayout {
 
     @ViewById(R.id.take_picture)

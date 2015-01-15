@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <ImageView
+        android:background="@android:drawable/screen_background_dark"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.3" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
+
+    <com.gc.materialdesign.views.ButtonFlat
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#1E88E5"
+        android:text="@string/cancel" />
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#1E88E5"
+        android:text="@string/ok" />
+
+</RelativeLayout>

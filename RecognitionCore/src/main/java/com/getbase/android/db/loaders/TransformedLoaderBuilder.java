@@ -1,10 +1,9 @@
-package com.mayer.recognition.database.nonsupport;
+package com.getbase.android.db.loaders;
 
 /**
  * Created by irikhmayer on 15.01.2015.
  */
 import com.getbase.android.db.common.QueryData;
-import com.getbase.android.db.loaders.WrappedLoaderBuilder;
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
 
