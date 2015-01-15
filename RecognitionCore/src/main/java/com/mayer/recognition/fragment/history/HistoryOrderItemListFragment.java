@@ -1,24 +1,24 @@
 package com.mayer.recognition.fragment.history;
 
-import android.support.v4.app.ListFragment;
+import android.app.ListFragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.mayer.recognition.R;
+import com.mayer.recognition.database.nonsupport.CursorLoaderBuilder;
 import com.mayer.recognition.database.Storage;
 import com.mayer.recognition.database.StorageProvider;
 import com.mayer.recognition.database.function.OrderItemModelFunction;
 import com.mayer.recognition.model.dao.order.OrderModel;
 
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-
-import com.getbase.android.db.loaders.CursorLoaderBuilder;
 
 import java.util.List;
 
