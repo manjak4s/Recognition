@@ -18,7 +18,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
-import android.media.AudioManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,15 +36,14 @@ import com.commonsware.cwac.camera.CameraUtils;
 import com.commonsware.cwac.camera.CameraView;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.commonsware.cwac.camera.PictureTransaction;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.mayer.recognition.R;
 import com.mayer.recognition.componenet.VerticalSeekBar;
-import com.mayer.recognition.componenet.camera.CameraControlsView;
-import com.mayer.recognition.componenet.camera.FfcRfcCameraButton;
-import com.mayer.recognition.componenet.camera.FlashButton;
+import com.mayer.recognition.componenet.camera.CameraPreviewControlsView;
+import com.mayer.recognition.componenet.camera.CameraFfcRfcButton;
+import com.mayer.recognition.componenet.camera.CameraFlashButton;
+import com.mayer.recognition.model.pojo.CameraPictureResult;
 import com.mayer.recognition.util.AnimatorUtil;
-import com.mayer.recognition.util.Logger;
+import com.mayer.recognition.util.LoactionUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -58,9 +57,13 @@ import org.androidannotations.annotations.SeekBarProgressChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Date;
+
+import de.greenrobot.event.EventBus;
+
 @EFragment(R.layout.camera_preview_fragment)
 @OptionsMenu(R.menu.camera)
-public class PreviewCameraFragment extends CameraFragment {
+public class CameraPreviewFragment extends CameraFragment {
 
     @OptionsMenuItem(R.id.single_shot)
     protected MenuItem singleShotItem;
@@ -72,7 +75,7 @@ public class PreviewCameraFragment extends CameraFragment {
     protected MenuItem showZoom;
 
     @ViewById(R.id.controls)
-    protected CameraControlsView controls;
+    protected CameraPreviewControlsView controls;
 
     @ViewById(R.id.camera)
     protected CameraView camera;
@@ -80,7 +83,7 @@ public class PreviewCameraFragment extends CameraFragment {
     @ViewById(R.id.progress)
     protected FrameLayout progressFrame;
 
-    protected boolean singleShotProcessing = false;
+    protected boolean singleShotProcessing;
 
     protected CameraHost hostInstance;
 
@@ -121,7 +124,6 @@ public class PreviewCameraFragment extends CameraFragment {
 
     @AfterViews
     protected void init() {
-//        setProgress(true);
         setCameraView(camera);
         controls.zoom.setKeepScreenOn(true);
         camera.setHost(getHost());
@@ -210,7 +212,6 @@ public class PreviewCameraFragment extends CameraFragment {
     @Background
     protected void takePictureShedule(PictureTransaction xact) {
         takingAShot = true;
-        Logger.d("Shutter takePictureShedule!");
         takePicture(xact);
     }
 
@@ -222,15 +223,6 @@ public class PreviewCameraFragment extends CameraFragment {
                 controls.zoom.setProgress(zoomLevel);
                 onProgressChangeOnSeekBar(controls.zoom, zoomLevel, true);
             }
-        }
-    }
-
-    protected void makeShutterSound() {
-        if (takingAShot) {
-            Logger.d("Shutter makeShutterSound!");
-            takingAShot = false;
-            AudioManager mgr = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-            mgr.playSoundEffect(AudioManager.FLAG_PLAY_SOUND);
         }
     }
 
@@ -252,17 +244,6 @@ public class PreviewCameraFragment extends CameraFragment {
         }
 
         @Override
-        public Camera.ShutterCallback getShutterCallback() {
-            return new Camera.ShutterCallback() {
-                @Override
-                public void onShutter() {
-                    Logger.d("Shutter!");
-                }
-            };
-        }
-
-
-        @Override
         public int getCameraId() {
             return cameraId;
         }
@@ -278,7 +259,6 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public void saveImage(PictureTransaction xact, byte[] image) {
-            Logger.d("Shutter saveImage!");
             if (useSingleShotMode()) {
                 singleShotProcessing = false;
                 enableShutter(true);
@@ -288,20 +268,28 @@ public class PreviewCameraFragment extends CameraFragment {
             } else {
 //                super.saveImage(xact, image);
             }
+            Location location = LoactionUtil.getBestLocation(getActivity());
+            double longitude;
+            double latitude;
+            if (location != null) {
+                longitude = location.getLongitude();
+                latitude = location.getLongitude();
+            } else {
+                longitude = 0d;
+                latitude = 0d;
+            }
+            CameraPictureResult result = new CameraPictureResult(image, longitude, latitude, new Date(), "Pic taken recently.");
+            EventBus.getDefault().post(result);
             setProgress(false);
         }
 
         @Override
         public void autoFocusAvailable() {
-            Logger.d("Shutter autoFocusAvailable!");
-//            makeShutterSound();
             zoom();
         }
 
         @Override
-        public void autoFocusUnavailable() {
-            Logger.d("Shutter autoFocusUnavailable!");
-        }
+        public void autoFocusUnavailable() { }
 
         @Override
         public void onCameraFail(CameraHost.FailureReason reason) {
@@ -311,7 +299,6 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public Parameters adjustPreviewParameters(Parameters parameters) {
-            Logger.d("Shutter adjustPreviewParameters!");
             if (flashLevel == null) {
                 flashLevel = CameraUtils.findBestFlashModeMatch(parameters,
                         Parameters.FLASH_MODE_TORCH,
@@ -320,7 +307,7 @@ public class PreviewCameraFragment extends CameraFragment {
             }
             controls.flash.setStates(camera.getCamera().getParameters().getSupportedFlashModes());
 
-            controls.flash.setFlashListener(new FlashButton.FlashListener() {
+            controls.flash.setFlashListener(new CameraFlashButton.FlashListener() {
                 @Override
                 public void onAutomatic() {
                     camera.setFlashMode(flashLevel = Parameters.FLASH_MODE_AUTO);
@@ -337,7 +324,7 @@ public class PreviewCameraFragment extends CameraFragment {
                 }
             });
 
-            controls.rotate.setRareFrontCameraChangeListener(new FfcRfcCameraButton.CameraFacingListener() {
+            controls.rotate.setRareFrontCameraChangeListener(new CameraFfcRfcButton.CameraFacingListener() {
                 @Override
                 public void onFFC() {
                     cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
@@ -360,11 +347,6 @@ public class PreviewCameraFragment extends CameraFragment {
             } else {
                 controls.zoom.setEnabled(false);
             }
-//            Camera.CameraInfo info = new Camera.CameraInfo();
-//            Camera.getCameraInfo(cameraId, info);
-//            if (info.canDisableShutterSound) {
-//                camera.camera.enableShutterSound(false);
-//            }
             Parameters params = super.adjustPreviewParameters(parameters);
             return params;
         }
@@ -372,7 +354,6 @@ public class PreviewCameraFragment extends CameraFragment {
         @Override
         @TargetApi(16)
         public void onAutoFocus(boolean success, Camera camera) {
-            Logger.d("Shutter onAutoFocus!");
             super.onAutoFocus(success, camera);
             enableShutter(true);
             setProgress(false);
@@ -380,7 +361,6 @@ public class PreviewCameraFragment extends CameraFragment {
 
         @Override
         public boolean mirrorFFC() {
-            Logger.d("Shutter mirrorFFC!");
             return mirrorFFC.isChecked();
         }
     }

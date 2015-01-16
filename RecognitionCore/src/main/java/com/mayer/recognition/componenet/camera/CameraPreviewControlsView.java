@@ -15,29 +15,29 @@ import org.androidannotations.annotations.ViewById;
  * Created by dot on 14.11.2014.
  */
 @EViewGroup(R.layout.camera_preview_controls)
-public class CameraControlsView extends GridLayout {
+public class CameraPreviewControlsView extends GridLayout {
 
     @ViewById(R.id.take_picture)
     public ImageButton shoot;
 
     @ViewById(R.id.flashIco)
-    public FlashButton flash;
+    public CameraFlashButton flash;
 
     @ViewById(R.id.rotateIco)
-    public FfcRfcCameraButton rotate;
+    public CameraFfcRfcButton rotate;
 
     @ViewById(R.id.zoom)
     public SeekBar zoom;
 
-    public CameraControlsView(Context context) {
+    public CameraPreviewControlsView(Context context) {
         super(context);
     }
 
-    public CameraControlsView(Context context, AttributeSet attrs) {
+    public CameraPreviewControlsView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CameraControlsView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CameraPreviewControlsView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

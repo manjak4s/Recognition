@@ -21,7 +21,7 @@ import java.util.List;
  * Created by dot on 23.11.2014.
  */
 @EView
-public class FlashButton extends ImageButton implements View.OnClickListener {
+public class CameraFlashButton extends ImageButton implements View.OnClickListener {
 
     protected List<String>  states = new ArrayList<String>();
     protected static final List<String> statesSupported = new ArrayList<String>();
@@ -56,7 +56,7 @@ public class FlashButton extends ImageButton implements View.OnClickListener {
 
 
 
-    public FlashButton(Context context, AttributeSet attrs) {
+    public CameraFlashButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOnClickListener(this);
         setStates(statesSupported);

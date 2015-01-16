@@ -15,35 +15,35 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 
-public class CursorLoaderBuilder {
+public class CursorLoaderBuilderPrime {
 
-    public static CursorLoaderBuilder forUri(Uri uri) {
-        return new CursorLoaderBuilder(uri);
+    public static CursorLoaderBuilderPrime forUri(Uri uri) {
+        return new CursorLoaderBuilderPrime(uri);
     }
 
     public final Query query;
 
-    private CursorLoaderBuilder(Uri uri) {
+    private CursorLoaderBuilderPrime(Uri uri) {
         this.query = ProviderAction.query(uri);
     }
 
-    public CursorLoaderBuilder projection(String... projection) {
+    public CursorLoaderBuilderPrime projection(String... projection) {
         query.projection(projection);
         return this;
     }
 
-    public CursorLoaderBuilder where(String selection, Object... selectionArgs) {
+    public CursorLoaderBuilderPrime where(String selection, Object... selectionArgs) {
         query.where(selection, selectionArgs);
         return this;
     }
 
-    public CursorLoaderBuilder orderBy(String orderBy) {
+    public CursorLoaderBuilderPrime orderBy(String orderBy) {
         query.orderBy(orderBy);
         return this;
     }
 
-    public <Out> TransformedLoaderBuilder<Out> transform(Function<Cursor, Out> function) {
-        return new TransformedLoaderBuilder<Out>(query.getQueryData(), function);
+    public <Out> TransformedLoaderBuilderPrime<Out> transform(Function<Cursor, Out> function) {
+        return new TransformedLoaderBuilderPrime<Out>(query.getQueryData(), function);
     }
 
     public <Out> WrappedLoaderBuilder<Out> wrap(Function<Cursor, Out> wrapper) {

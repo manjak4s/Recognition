@@ -8,8 +8,8 @@ import android.content.Loader;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.getbase.android.db.loaders.CursorLoaderBuilderPrime;
 import com.mayer.recognition.R;
-import com.getbase.android.db.loaders.CursorLoaderBuilder;
 import com.mayer.recognition.database.Storage;
 import com.mayer.recognition.database.StorageProvider;
 import com.mayer.recognition.database.function.OrderItemModelFunction;
@@ -46,7 +46,7 @@ public class HistoryOrderItemListFragment extends ListFragment implements Loader
 
     @Override
     public Loader<List<OrderModel>> onCreateLoader(int id, Bundle args) {
-        CursorLoaderBuilder loader = CursorLoaderBuilder.forUri(URI_ORDERS);
+        CursorLoaderBuilderPrime loader = CursorLoaderBuilderPrime.forUri(URI_ORDERS);
 //        loader.where(Storage.RecognitionOrderTable.ITEM_ID + " = ?", model.guid);
 //        if (status != null) {
 //            loader.where(ShopStore.UnitTable.STATUS + " = ?", status.ordinal());

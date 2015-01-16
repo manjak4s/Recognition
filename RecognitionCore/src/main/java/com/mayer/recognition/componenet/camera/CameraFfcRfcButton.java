@@ -14,7 +14,7 @@ import org.androidannotations.annotations.EView;
  * Created by dot on 23.11.2014.
  */
 @EView
-public class FfcRfcCameraButton extends ToggleButton implements View.OnClickListener {
+public class CameraFfcRfcButton extends ToggleButton implements View.OnClickListener {
 
     private String mState;
     private CameraFacingListener flashListener;
@@ -40,7 +40,7 @@ public class FfcRfcCameraButton extends ToggleButton implements View.OnClickList
     }
 
 
-    public FfcRfcCameraButton(Context context, AttributeSet attrs) {
+    public CameraFfcRfcButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         int count = CameraUtil.getCameraCount();
         if (count <= 1) {

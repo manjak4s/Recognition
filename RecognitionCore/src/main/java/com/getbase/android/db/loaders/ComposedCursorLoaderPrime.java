@@ -29,7 +29,7 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-public class ComposedCursorLoader<T> extends AsyncTaskLoader<T> {
+public class ComposedCursorLoaderPrime<T> extends AsyncTaskLoader<T> {
     final ForceLoadContentObserver mObserver;
 
     Uri mUri;
@@ -41,7 +41,7 @@ public class ComposedCursorLoader<T> extends AsyncTaskLoader<T> {
     T mResult;
 
     private final Function<Cursor, T> mCursorTransformation;
-    private IdentityLinkedMap<T, Cursor> cursorsForResults = new IdentityLinkedMap<T, Cursor>();
+    private IdentityLinkedMapPrime<T, Cursor> cursorsForResults = new IdentityLinkedMapPrime<T, Cursor>();
 
     /* Runs on a worker thread */
     @Override
@@ -90,7 +90,7 @@ public class ComposedCursorLoader<T> extends AsyncTaskLoader<T> {
         }
     }
 
-    public ComposedCursorLoader(Context context, QueryData queryData, Function<Cursor, T> cursorTransformation) {
+    public ComposedCursorLoaderPrime(Context context, QueryData queryData, Function<Cursor, T> cursorTransformation) {
         super(context);
         mObserver = new ForceLoadContentObserver();
         mUri = queryData.getUri();

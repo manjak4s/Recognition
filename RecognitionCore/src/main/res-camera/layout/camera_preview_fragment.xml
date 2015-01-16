@@ -12,7 +12,7 @@
 
     <include layout="@layout/progress_overlay"/>
 
-    <com.mayer.recognition.componenet.camera.CameraControlsView_
+    <com.mayer.recognition.componenet.camera.CameraPreviewControlsView_
         android:id="@+id/controls"
         android:layout_width="fill_parent"
         android:layout_height="130dp"

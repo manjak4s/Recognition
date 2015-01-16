@@ -1,10 +1,8 @@
 package com.mayer.recognition.fragment.camera;
 
-import android.app.Fragment;
 import android.widget.ImageView;
 
 import com.mayer.recognition.R;
-import com.mayer.recognition.componenet.camera.CameraControlsView;
 import com.mayer.recognition.componenet.camera.CameraSnapshotControlsView;
 import com.mayer.recognition.fragment.BasicFragmentV4;
 

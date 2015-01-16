@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-class IdentityLinkedMap<K, V> {
+class IdentityLinkedMapPrime<K, V> {
 
     private static class Entry<Key, Value> {
         Key key;

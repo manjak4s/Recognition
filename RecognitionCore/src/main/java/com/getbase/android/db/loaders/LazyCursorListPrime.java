@@ -7,12 +7,12 @@ import android.database.Cursor;
 
 import java.util.AbstractList;
 
-class LazyCursorList<T> extends AbstractList<T> {
+class LazyCursorListPrime<T> extends AbstractList<T> {
 
     private final Cursor cursor;
     private final Function<Cursor, T> transformation;
 
-    public LazyCursorList(Cursor cursor, Function<Cursor, T> function) {
+    public LazyCursorListPrime(Cursor cursor, Function<Cursor, T> function) {
         this.cursor = Cursors.returnSameOrEmptyIfNull(cursor);
         this.transformation = function;
     }

@@ -1,26 +1,17 @@
 package com.mayer.recognition.activity;
 
-import android.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.commonsware.cwac.camera.CameraHost;
-import com.commonsware.cwac.camera.CameraHostProvider;
-import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.mayer.recognition.R;
 import com.mayer.recognition.adapter.DrawerManuAdapter;
-import com.mayer.recognition.adapter.MenuAdapter;
 import com.mayer.recognition.adapter.TabsPagerAdapter;
-import com.mayer.recognition.fragment.camera.PreviewCameraFragment;
 import com.mayer.recognition.componenet.drawer.SmartDrawerRecyclerView;
-import com.mayer.recognition.util.Logger;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -32,12 +23,9 @@ import org.androidannotations.annotations.ViewById;
 /**
  * Created by dot on 16.11.2014.
  */
-@EActivity(R.layout.activity_main)
+@EActivity
 @OptionsMenu(R.menu.launcher)
-public class BasicNavigationActivity extends ActionBarActivity implements CameraHostProvider,
-                                                                          PreviewCameraFragment.Contract,
-                                                                          ViewPager.OnPageChangeListener,
-                                                                          AdapterView.OnItemClickListener {
+public abstract class BasicNavigationActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener, AdapterView.OnItemClickListener {
 
     @ViewById
     protected Toolbar toolbar;
@@ -91,21 +79,6 @@ public class BasicNavigationActivity extends ActionBarActivity implements Camera
             drawerPisition = 0;
             onItemClick(null, null, drawerPisition, 0);
         }
-    }
-
-    @Override
-    public CameraHost getCameraHost() {
-        return(new SimpleCameraHost(this));
-    }
-
-    @Override
-    public boolean isSingleShotMode() {
-        return false;
-    }
-
-    @Override
-    public void setSingleShotMode(boolean mode) {
-        //do nothing
     }
 
     @Override

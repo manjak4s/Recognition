@@ -13,18 +13,18 @@ import android.database.Cursor;
 
 import java.util.List;
 
-public class TransformedLoaderBuilder<T> {
+public class TransformedLoaderBuilderPrime<T> {
 
     private final QueryData queryData;
     private final Function<Cursor, T> cursorTransformation;
 
-    public TransformedLoaderBuilder(QueryData queryData, Function<Cursor, T> transformation) {
+    public TransformedLoaderBuilderPrime(QueryData queryData, Function<Cursor, T> transformation) {
         this.queryData = queryData;
         this.cursorTransformation = transformation;
     }
 
-    public <Out> TransformedLoaderBuilder<Out> transform(final Function<T, Out> function) {
-        return new TransformedLoaderBuilder<Out>(queryData, Functions.compose(function, cursorTransformation));
+    public <Out> TransformedLoaderBuilderPrime<Out> transform(final Function<T, Out> function) {
+        return new TransformedLoaderBuilderPrime<Out>(queryData, Functions.compose(function, cursorTransformation));
     }
 
     public <Out> WrappedLoaderBuilder<Out> wrap(final Function<List<T>, Out> wrapper) {
@@ -32,14 +32,14 @@ public class TransformedLoaderBuilder<T> {
     }
 
     public Loader<List<T>> build(Context context) {
-        return new ComposedCursorLoader<>(context, queryData, getTransformationFunction());
+        return new ComposedCursorLoaderPrime<>(context, queryData, getTransformationFunction());
     }
 
     private Function<Cursor, List<T>> getTransformationFunction() {
         return new Function<Cursor, List<T>>() {
             @Override
             public List<T> apply(Cursor cursor) {
-                return new LazyCursorList<T>(cursor, cursorTransformation);
+                return new LazyCursorListPrime<T>(cursor, cursorTransformation);
             }
         };
     }

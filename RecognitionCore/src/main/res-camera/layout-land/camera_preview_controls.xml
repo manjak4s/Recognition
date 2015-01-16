@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
 
-        <com.mayer.recognition.componenet.camera.FfcRfcCameraButton_
+        <com.mayer.recognition.componenet.camera.CameraFfcRfcButton_
             android:id="@+id/rotateIco"
             android:layout_width="@dimen/toggle_bg_size"
             android:layout_height="@dimen/toggle_bg_size"
@@ -34,7 +34,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false" />
 
-        <com.mayer.recognition.componenet.camera.FlashButton_
+        <com.mayer.recognition.componenet.camera.CameraFlashButton_
             android:id="@+id/flashIco"
             android:layout_width="@dimen/toggle_bg_size"
             android:layout_height="@dimen/toggle_bg_size"

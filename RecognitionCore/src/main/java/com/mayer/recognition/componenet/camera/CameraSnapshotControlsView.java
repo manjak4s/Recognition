@@ -3,8 +3,6 @@ package com.mayer.recognition.componenet.camera;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
 
 import com.gc.materialdesign.views.ButtonFlat;
 import com.mayer.recognition.R;
@@ -22,7 +20,7 @@ public class CameraSnapshotControlsView extends GridLayout {
     public ButtonFlat cancelBtn;
 
     @ViewById(R.id.ok_button)
-    public FlashButton okButton;
+    public CameraFlashButton okButton;
 
     public CameraSnapshotControlsView(Context context) {
         super(context);
